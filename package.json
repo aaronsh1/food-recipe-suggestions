@@ -1,0 +1,18 @@
+{
+  "name": "food-recipe-suggestions",
+  "version": "1.0.0",
+  "description": "A food recipe suggestion site where you can input ingredients and possible recipes will be returned.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronsh1/food-recipe-suggestions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronsh1/food-recipe-suggestions/issues"
+  },
+  "homepage": "https://github.com/aaronsh1/food-recipe-suggestions#readme"
+}
