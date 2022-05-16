@@ -5,20 +5,21 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c -w",
-    "dev": "npm-run-all --parallel start watch",
-    "start": "serve public",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon --exec \"npm run build && npm start\" --ignore public"
   },
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "lit": "^2.2.3",
+    "express": "^4.18.1",
+    "lit": "^2.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16",
     "rollup": "^2.72.1",
     "rollup-plugin-terser": "^7.0.2",
-    "serve": "^13.0.2"
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0"
   }
 }

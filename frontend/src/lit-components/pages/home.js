@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 
-import { HomeStyles } from '../styles/home';
+import { HomeStyles } from '../../styles';
 
 export class Home extends LitElement {
   static styles = HomeStyles;
