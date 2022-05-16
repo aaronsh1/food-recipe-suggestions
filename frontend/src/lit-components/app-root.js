@@ -4,20 +4,29 @@ export class AppRoot extends LitElement {
   static styles = css``;
 
   static properties = {
-    currentRoute: { type: String }
+
   }
 
   constructor() {
     super();
   }
 
-  //TODO: Routing logic
   //TODO: Global components (such as nav, etc.)
   render() {
-    switch (this.currentRoute) {
-      default: return html`
+    let route = window.location.href
+      .replace(/http(s)?:\/\/.+?\//, '') //Remove hostname
+      .replace(/\?.+/, '') //Remove query params
+
+    if (route.endsWith('/')) {
+      route = route.substring(0, route.length - 1);
+    }
+
+    switch (route) {
+      case 'home': return html`
         <home-page></home-page>
       `;
+
+      default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
   }
 }
