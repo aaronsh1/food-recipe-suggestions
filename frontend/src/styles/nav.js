@@ -60,8 +60,12 @@ export const NavStyles = css`
     #signup {
         margin-left: auto;
     }
+    
+    #profile {
+        margin-right: 20px;
+    }
 
-    #logo {
+    .logo {
         margin-left: 20px;
     }
 `;
