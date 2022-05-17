@@ -23,6 +23,7 @@ export class AppRoot extends LitElement {
 
     switch (route) {
       case 'home': return html`
+        <nav-bar></nav-bar>
         <home-page></home-page>
       `;
 
