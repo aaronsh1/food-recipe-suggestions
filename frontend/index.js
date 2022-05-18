@@ -7,6 +7,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const server = express();
 
+server.get('/public/images/*', (req, res) => {
+  res.sendFile(__dirname + req.url);
+});
+
 server.get('/bundle.js', (req, res) => {
   res.sendFile(__dirname + '/public/bundle.js');
 });
