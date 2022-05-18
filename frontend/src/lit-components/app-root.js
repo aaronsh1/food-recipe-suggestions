@@ -1,13 +1,7 @@
 import { html, LitElement, css } from 'lit';
-
+import {AppRootStyles} from '../styles';
 export class AppRoot extends LitElement {
-  static styles = css`
-  .profile {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }`;
+  static styles = AppRootStyles
 
   static properties = {
 
