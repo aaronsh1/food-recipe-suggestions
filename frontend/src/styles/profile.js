@@ -8,16 +8,17 @@ export const ProfileStyles = css`
 }
 
 h2 {
-    top: 90px;
+    top: 260px;
     font-size: 55px;
-    
+    position: absolute;
+    color: #264653;
 }
 
 .profile-image {
     position: absolute;
     height: 150px;
-    top: 214px;
-    clip-path: circle(70px at 50% 50%);
+    top: 150px;
+    clip-path: circle(65px at 50% 50%);
 }
 
 @media (min-width: 768px) {
@@ -47,11 +48,7 @@ h2 {
  
   @media (min-width: 1200px) {}
 
-h2 {
-    position: absolute;
 
-    color: #264653;
-}
 
 
 .profile-container {

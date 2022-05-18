@@ -21,9 +21,11 @@ export class Profile extends LitElement {
 
   render() {
     return html`
-<img class='banner-image' src='/public/images/banner-profile.png' alt='Banner Image'>
-<img class='profile-image' src='/public/images/profile-picture-default.jpg' alt='Profile picture'>
-<h2>Your Profile Details</h2>
+
+        <img class='banner-image' src='/public/images/banner-profile.png' alt='Banner Image'>
+        <img class='profile-image' src='/public/images/profile-picture-default.jpg' alt='Profile picture'>
+        <h2>Your Profile Details</h2>
+
     <section class='profile-container'>
     
         <form class='form-style'>

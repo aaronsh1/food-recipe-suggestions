@@ -27,18 +27,24 @@ export class AppRoot extends LitElement {
       route = route.substring(0, route.length - 1);
     }
 
+    let page;
+
     switch (route) {
-      case 'home': return html`
-        <nav-bar></nav-bar>
-        <home-page></home-page>
-      `;
-      case 'profile': return html`
-      <nav-bar></nav-bar>
-      <profile-page class='profile'></profile-page>
-      `;
+      case 'home': 
+        page = html`<home-page></home-page>`; 
+        break;
+
+        case 'profile': 
+        page = html`<profile-page class='profile'></profile-page>>`; 
+        break;
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
+
+    return html`
+      <nav-bar></nav-bar>
+      ${page}
+    `;
   }
 }
 customElements.define('app-root', AppRoot);
