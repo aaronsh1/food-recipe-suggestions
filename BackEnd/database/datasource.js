@@ -16,19 +16,6 @@ const close = async () => {
   await sequelize.close();
 }
 
-initialize()
-.then(() => {
-  console.log('connected');
-
-  close()
-  .then(() => {
-    console.log('closed');
-  });
-})
-.catch(error => {
-  console.error(error);
-});
-
 module.exports = {
   initialize,
   close,
