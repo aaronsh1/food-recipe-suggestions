@@ -1,5 +1,18 @@
 const { DataTypes } = require('sequelize');
 
+const ModelNames = {
+  User: 'User',
+  Pantry: 'Pantry',
+  Ingredient: 'Ingredient',
+  RecipeIngredients: 'RecipeIngredients',
+  UserFavourite: 'UserFavourite',
+  Recipe: 'Recipe',
+}
+
+//TODO: Define getters and setters on relevant fields
+//https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/
+//TODO: Validation
+//https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const Models = {
   User: {
     UserId: {
@@ -147,4 +160,5 @@ const Models = {
 
 module.exports = {
   Models,
+  ModelNames,
 };
