@@ -84,11 +84,63 @@ const Models = {
   },
 
   UserFavourite: {
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'userFavIndex',
+      references: {
+        model: User,
+        key: 'UserId'
+      }
+    },
 
+    RecipeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'userFavIndex',
+      references: {
+        model: Recipe,
+        key: 'RecipeId'
+      }
+    },
+
+    Timestamp: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
   },
 
   Recipe: {
+    RecipeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true
+    },
 
+    RecipeName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    Description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    Method: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    Image: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    Author: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
   },
 }
 
