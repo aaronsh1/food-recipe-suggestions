@@ -21,13 +21,19 @@ export class AppRoot extends LitElement {
       route = route.substring(0, route.length - 1);
     }
 
-    switch (route) {
-      case 'home': return html`
-        <home-page></home-page>
-      `;
+    let page;
 
+    switch (route) {
+      case 'home': 
+        page = html`<home-page></home-page>`; 
+        break;
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
+
+    return html`
+      <nav-bar></nav-bar>
+      ${page}
+    `;
   }
 }
 customElements.define('app-root', AppRoot);
