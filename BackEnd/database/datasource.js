@@ -34,9 +34,7 @@ const getSequelizeInstance = async () => {
 }
 
 const sync = async () => {
-  const defs = Object.entries(getModelDefinitions()).map(([_, model]) => {
-    return model;
-  });
+  const defs = Object.values(getModelDefinitions());
 
   return await Promise.all(defs.map(model => {
     return new Promise(async () => {
