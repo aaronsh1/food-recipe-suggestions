@@ -1,9 +1,6 @@
 import { html, LitElement } from 'lit';
 
 import {ProfileStyles } from '../../styles';
-import banner from '../../../public/images/banner-profile.png';
-import profile_picture_default from '../../../public/images/profile-picture-default.jpg';
-
 export class Profile extends LitElement {
   static styles = ProfileStyles;
  
@@ -24,8 +21,8 @@ export class Profile extends LitElement {
 
   render() {
     return html`
-<img class='banner-image' src=${banner} alt='Banner Image'>
-<img class='profile-image' src=${profile_picture_default} alt='Profile picture'>
+<img class='banner-image' src='/public/images/banner-profile.png' alt='Banner Image'>
+<img class='profile-image' src='/public/images/profile-picture-default.jpg' alt='Profile picture'>
 <h2>Your Profile Details</h2>
     <section class='profile-container'>
     
