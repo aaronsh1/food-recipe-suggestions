@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 const Models = {
   User: {
-    Id: {
+    UserId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -26,22 +26,61 @@ const Models = {
   },
 
   Pantry: {
-    User: {
+    UserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: this.Models.User,
+        key: 'UserId',
+      },
     },
-    Ingredient: {
+    IngredientId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: this.Models.Ingredient,
+        key: 'IngredientId',
+      },
     },
   },
 
   Ingredient: {
-
+    IngredientId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    IngredientName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Category: {
+      type: DataTypes.INTEGER,
+    },
+    Image: {
+      type: DataTypes.STRING,
+    },
   },
 
   RecipeIngredients: {
-
+    RecipeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'recipeIngredientIndex',
+      references: {
+        model: this.Models.Recipe,
+        key: 'RecipeId',
+      },
+    },
+    IngredientId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'recipeIngredientIndex',
+      references: {
+        model: this.Models.Ingredient,
+        key: 'IngredientId',
+      },
+    },
   },
 
   UserFavourite: {
