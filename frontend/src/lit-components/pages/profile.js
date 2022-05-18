@@ -7,7 +7,8 @@ export class Profile extends LitElement {
 
   static get properties() {
     return {
-      showPasswordChangeInputs: {type:Boolean}
+      showPasswordChangeInputs: {type:Boolean},
+      collapseBanner: {type:Boolean}
     };
   }
 
@@ -15,6 +16,7 @@ export class Profile extends LitElement {
   constructor() {
     super();
     this.showPasswordChangeInputs = false
+    this.collapseBanner = false;
   }
 
 
@@ -22,9 +24,9 @@ export class Profile extends LitElement {
   render() {
     return html`
 
-        <img class='banner-image' src='/public/images/banner-profile.png' alt='Banner Image'>
-        <img class='profile-image' src='/public/images/profile-picture-default.jpg' alt='Profile picture'>
-        <h2>Your Profile Details</h2>
+        <img class='${this.collapseBanner ? 'banner-image collapse' : 'banner-image'}'  src='/public/images/banner-profile.png' alt='Banner Image'>
+        <img class='${this.collapseBanner ? 'profile-image hidden' : 'profile-image visible'}'  src='/public/images/profile-picture-default.jpg' alt='Profile picture'>
+        <h2 class='${this.collapseBanner ? 'collapse-heading' : ''}'>Your Profile Details</h2>
 
     <section class='profile-container'>
     
@@ -64,10 +66,12 @@ export class Profile extends LitElement {
   _changePasswordClick(e) {
     console.log(this.showPasswordChangeInputs);
     this.showPasswordChangeInputs = true;
+    this.collapseBanner = true;
 }
 
 _discard(e) {
     this.showPasswordChangeInputs = false;
+    this.collapseBanner = false;
 }
 
 _apply(e) {

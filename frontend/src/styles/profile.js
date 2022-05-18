@@ -12,6 +12,14 @@ h2 {
     font-size: 55px;
     position: absolute;
     color: #264653;
+    transition: top 0.5s, font-size 0.5s, position 0.5s;
+    
+}
+
+.collapse-heading {
+    top: 100px;
+    transition: top 2s;
+
 }
 
 .profile-image {
@@ -44,6 +52,10 @@ h2 {
         top: 150px;
         clip-path: circle(100px at 50% 50%);
     }
+    
+    .collapse-heading {
+        top: 80px;
+    }
   }
  
   @media (min-width: 1200px) {}
@@ -62,6 +74,13 @@ h2 {
     background-color: rgba(233, 196, 106,0.5);
     opacity: 0.7;
     height: 250px;
+    transition: all 2s ease;
+}
+
+.banner-image.collapse {
+    object-fit: cover;
+    height: 100px;
+    object-position: bottom;
 }
 
 .input-style {
@@ -84,13 +103,21 @@ h2 {
     font-size: medium;
 }
 
-.show {
-    display: flex;
-}
-
 .hide {
     display: none;
 }
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s linear;
+  }
+
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 1s linear;
+  }
 
 
 
