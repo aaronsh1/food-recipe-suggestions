@@ -7,14 +7,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const server = express();
 
-server.use(express.static(__dirname + "/public"));
-
-server.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+server.get('/public/images/*', (req, res) => {
+  res.sendFile(__dirname + req.url);
 });
 
-server.get('/pantry', (req, res) => {
-  res.sendFile(__dirname + '/public/pantry.html');
+server.get('/bundle.js', (req, res) => {
+  res.sendFile(__dirname + '/public/bundle.js');
+});
+
+server.get('/*', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 const port = 8080;

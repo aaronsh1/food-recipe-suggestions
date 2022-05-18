@@ -26,6 +26,10 @@ export class AppRoot extends LitElement {
         <home-page></home-page>
       `;
 
+      case 'pantry': return html`
+        <pantry-a></pantry-a>
+      `;
+
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
   }
