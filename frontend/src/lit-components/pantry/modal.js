@@ -72,6 +72,14 @@ export class AddIngredientModal extends LitElement {
     }
 
     render() {
+        () => {
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data.map(
+                item => this.ingredientList.push(item)
+            ))
+        };
+
         return html`
             <section id="add-ingredient-modal">
                 <header class="add-ingr-modal-title">${this.title}</header>
