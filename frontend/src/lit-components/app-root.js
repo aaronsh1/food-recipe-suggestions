@@ -25,7 +25,7 @@ export class AppRoot extends LitElement {
 
     switch (route) {
       case 'home': 
-        page = '<home-page></home-page>'; 
+        page = html`<home-page></home-page>`; 
         break;
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }

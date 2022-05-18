@@ -17,7 +17,7 @@ export class NavBar extends LitElement {
         return html`
         <header>
             <a href="#" id="profile">
-                <img src="../../../public/images/userprofile.svg" alt="profile">
+                <img src="/public/images/userprofile.svg" alt="profile">
             </a>
             <nav class="navbar">
                 <ul class="navMenu">
@@ -28,7 +28,7 @@ export class NavBar extends LitElement {
             </nav>
             <a href="#" id="signup"><button>Sign-up</button></a>
             <a href="#"><button>Login</button></a>
-            <img class="logo" src="../../../public/images/logo.svg" alt=""logo">
+            <img class="logo" src="/public/images/logo.svg" alt=""logo">
         </header>
         `;
     }
