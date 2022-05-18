@@ -1,4 +1,3 @@
 import { AppRoot } from './lit-components';
-
-const root = new AppRoot();
-document.body.appendChild(root);
+import { PantryIngredient } from "./lit-components/pantry/ingredient";
+import { AddIngredientModal } from './lit-components/pantry/modal';
