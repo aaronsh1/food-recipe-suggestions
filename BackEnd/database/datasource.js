@@ -2,10 +2,26 @@ const { Sequelize } = require('sequelize');
 const { Models } = require('./models');
 
 let sequelize = undefined;
+let modelDefinitions = undefined;
+
+const getModelDefinitions = () => {
+  if (!sequelize) {
+    return null;
+  }
+
+  if (!modelDefinitions) {
+    modelDefinitions = {};
+    Object.entries(Models).forEach(([name, model]) => {
+      modelDefinitions[name] = sequelize.define(name, model);
+    });
+  }
+
+  return modelDefinitions;
+};
 
 const initialize = async () => {
-  sequelize = new Sequelize('', 'admin', 'awegGo74543oawt3iZ', {
-    host: 'food-website-instance-1.cszopbtc5jh8.us-east-1.rds.amazonaws.com',
+  sequelize = new Sequelize('food', 'root', 'root', {
+    host: 'localhost',
     port: 3306,
     dialect: 'mysql',
   });
@@ -14,14 +30,14 @@ const initialize = async () => {
 }
 
 const sync = async () => {
-  const defs = Object.entries(Models).map(([name, model]) => {
-    sequelize.define(name, model);
+  const defs = Object.entries(modelDefinitions).map(([name, model]) => {
+    return model;
   });
 
-  await Promise.all(defs.map(model => {
-    return () => {
+  return await Promise.all(defs.map(model => {
+    return new Promise(async () => {
       await model.sync();
-    };
+    });
   }));
 };
 

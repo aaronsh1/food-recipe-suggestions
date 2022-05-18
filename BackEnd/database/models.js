@@ -30,7 +30,7 @@ const Models = {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: this.Models.User,
+        model: 'Users',
         key: 'UserId',
       },
     },
@@ -38,7 +38,7 @@ const Models = {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: this.Models.Ingredient,
+        model: 'Ingredients',
         key: 'IngredientId',
       },
     },
@@ -68,7 +68,7 @@ const Models = {
       allowNull: false,
       unique: 'recipeIngredientIndex',
       references: {
-        model: this.Models.Recipe,
+        model: 'Recipes',
         key: 'RecipeId',
       },
     },
@@ -77,7 +77,7 @@ const Models = {
       allowNull: false,
       unique: 'recipeIngredientIndex',
       references: {
-        model: this.Models.Ingredient,
+        model: 'Ingredients',
         key: 'IngredientId',
       },
     },
@@ -89,7 +89,7 @@ const Models = {
       allowNull: false,
       unique: 'userFavIndex',
       references: {
-        model: User,
+        model: 'Users',
         key: 'UserId'
       }
     },
@@ -99,7 +99,7 @@ const Models = {
       allowNull: false,
       unique: 'userFavIndex',
       references: {
-        model: Recipe,
+        model: 'Recipes',
         key: 'RecipeId'
       }
     },
@@ -113,6 +113,7 @@ const Models = {
   Recipe: {
     RecipeId: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
       autoIncrement: true
     },
