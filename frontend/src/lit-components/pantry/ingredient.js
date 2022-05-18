@@ -11,6 +11,8 @@ export class PantryIngredient extends LitElement {
         flex-direction: column;
         justify-content: space-around;
         margin: 3%;
+        box-shadow: #c18800 0.6em 0.6em 0.5em;
+        padding: 10% 0;
     }
     .ingredient-pic {
         width: 40%;
