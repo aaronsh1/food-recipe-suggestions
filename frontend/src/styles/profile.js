@@ -1,9 +1,61 @@
 import { css } from 'lit';
 
 export const ProfileStyles = css`
+.input-style {
+    width: 200px;
+    padding: 5px;
+    font-size: medium;
+}
+
+h2 {
+    top: 90px;
+    font-size: 55px;
+    
+}
+
+.profile-image {
+    position: absolute;
+    height: 150px;
+    top: 214px;
+    clip-path: circle(70px at 50% 50%);
+}
+
+@media (min-width: 768px) {
+
+    .input-style {
+        width: 350px;
+        padding: 10px;
+        font-size: large;
+    }
+  }
+ 
+  @media (min-width: 1100px) {
+    h2 {
+        font-size: 70px;
+        top: 200px;
+
+    }
+
+    .profile-image {
+        position: absolute;
+        height: 220px;
+        left: 30px;
+        top: 150px;
+        clip-path: circle(100px at 50% 50%);
+    }
+  }
+ 
+  @media (min-width: 1200px) {}
+
+h2 {
+    position: absolute;
+
+    color: #264653;
+}
+
 
 .profile-container {
-    display: flex;
+    width: -webkit-fill-available;
     background-color: rgba(233, 196, 106,0.5);
     font-size: larger;
 }
@@ -18,9 +70,6 @@ export const ProfileStyles = css`
 .input-style {
     background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
-    width: 350px;
-    padding: 10px;
-    font-size: large;
 }
 
 .form-style {
@@ -34,7 +83,7 @@ export const ProfileStyles = css`
     border: 0;
     background-color: transparent;
     cursor: pointer;
-    padding: 10px 0px;
+    padding: 30px 0px;
     font-size: medium;
 }
 
@@ -46,20 +95,29 @@ export const ProfileStyles = css`
     display: none;
 }
 
-.button-general {
-    border-radius: 40px;
-    border: none;
-    background-color: #E76F51;
-    padding: 10px;
-    color: #264653;
-    cursor: pointer;
-    font-size: medium;
 
+
+.button-general {
+    font-weight: 250;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: rgba(231,111,81,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all o.3s ease 0s;
 }
+
+
+.button-general:hover {
+    background-color: rgba(231,111,81,0.5);
+}
+
 .discard-button {
     color: #264653;
-    position: absolute;
-    bottom: 30px;
 }
 
 .apply-button {

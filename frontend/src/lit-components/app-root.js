@@ -1,7 +1,13 @@
 import { html, LitElement, css } from 'lit';
 
 export class AppRoot extends LitElement {
-  static styles = css``;
+  static styles = css`
+  .profile {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }`;
 
   static properties = {
 
@@ -23,10 +29,12 @@ export class AppRoot extends LitElement {
 
     switch (route) {
       case 'home': return html`
+        <nav-bar></nav-bar>
         <home-page></home-page>
       `;
       case 'profile': return html`
-      <profile-page></profile-page>
+      <nav-bar></nav-bar>
+      <profile-page class='profile'></profile-page>
       `;
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
