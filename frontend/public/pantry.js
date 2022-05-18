@@ -69,24 +69,27 @@ let addIngredientsToPage = (ingredient, pantrySection) => {
 }
 
 let addIngredient = (ingredient) => {
-    let addIngredientForm = document.getElementsByClassName("add-ingredient-form");
-    let form = FormData(addIngredientForm);
+    // let addIngredientForm = document.getElementsByClassName("add-ingredient-form");
+    // let form = FormData(addIngredientForm);
 
-    let ingredientToAdd = {
-        "User": form.user,
-        "Name": form.name
-    }
+    // let ingredientToAdd = {
+    //     "User": form.user,
+    //     "Name": form.name
+    // }
 
-    fetch(apiUrl, {
-        method: "POST",
-        body: ingredientToAdd
-    })
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+    // fetch(apiUrl, {
+    //     method: "POST",
+    //     body: ingredientToAdd
+    // })
+    // .then((res) => {
+    //     console.log(res);
+    // })
+    // .catch((err) => {
+    //     console.log(err);
+    // })
+
+    let bodyChildren = document.querySelectorAll("body > *:not(add-ingredient-modal)");
+    bodyChildren.forEach(child => child.classList -= " blur");
 
     // rerender page
 }
@@ -95,16 +98,24 @@ let getIngredients = (userId) => {
     // query on db to get ingredients
 }
 
+let modalPopUp = () => {
+    let modalToAdd = document.createElement("add-ingredient-modal");
+    document.body.appendChild(modalToAdd);
+    let bodyChildren = document.querySelectorAll("body > *:not(add-ingredient-modal)");
+    bodyChildren.forEach(child => child.classList += " blur");
+}
+
+let submitIngredientHandler = () => {
+    addIngredient();
+}
+
 let addIngredientButtonHandler = () => {
     // adjust css to blur background and modal pop up
-
-
+    modalPopUp();
+    document.querySelector("#add-ingredient-submit").addEventListener("click", submitIngredientHandler);
 }
 
-let modalPopUp = () => {
-    document.body.appendChild("add-ingredient-modal");
-    document.body.className += " blur";
-}
+document.querySelector("#add-ingredient-fab").addEventListener("click", addIngredientButtonHandler);
 
 
 // Run methods
