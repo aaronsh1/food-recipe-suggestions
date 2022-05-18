@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit';
 
 import {ProfileStyles } from '../../styles';
-import banner from './banner-profile.png';
-import profile_picture_default from './profile-picture-default.jpg';
+import banner from '../../../public/images/banner-profile.png';
+import profile_picture_default from '../../../public/images/profile-picture-default.jpg';
 
 export class Profile extends LitElement {
   static styles = ProfileStyles;
