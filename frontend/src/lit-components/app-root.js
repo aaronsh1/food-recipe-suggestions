@@ -35,6 +35,10 @@ export class AppRoot extends LitElement {
         page = html`<profile-page class='profile'></profile-page>>`; 
         break;
 
+        case 'recipes': 
+        page = html`<recipes-page></recipes-page>`; 
+        break;
+
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
 

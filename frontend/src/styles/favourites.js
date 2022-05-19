@@ -55,4 +55,15 @@ export const FavouritesStyles = css`
     opacity: 0;
     transition: visibility 0s 1s, opacity 1s linear;
   }
+
+  main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+    
+  .recipeCard {
+      width: 70%;
+  }
 `;
