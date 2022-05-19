@@ -51,6 +51,6 @@ export const ModalStyles = css `
     }
 
     .ingredient-option {
-        width: 50%;
+        width: 100%;
     }
 `

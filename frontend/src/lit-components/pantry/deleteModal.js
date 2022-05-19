@@ -15,14 +15,14 @@ export class DeleteModal extends LitElement {
         this.ingredientName = ingredientName;
     }
 
-    yesClickHandler = (id) => {
+    yesClickHandler = () => {
         fetchApi({
             endpoint: 'pantry',
             data:{
-                UserId: 1,
-                IngredientId: this.ingredientId
+                IngredientId: [this.ingredientId]
             },
-            method: "DELETE"
+            method: "DELETE",
+            token: window.localStorage.getItem("token")
         })
         .then(res => {
             if(res.status == 200) {
@@ -33,6 +33,7 @@ export class DeleteModal extends LitElement {
         .catch(err => {
             console.log(err);
         })
+        window.location.href = '/pantry';
     }
 
     noClickHandler = () => {
@@ -46,7 +47,7 @@ export class DeleteModal extends LitElement {
                 <header class="del-ingr-modal-title">${this.ingredientName}</header>
                 <h2>Are you sure you want to delete ${this.ingredientName} from your pantry?</h2>
                 <section class="delete-buttons">
-                    <button id="delete-yes" class="delete-button" @click=${() => this.yesClickHandler(this.ingredientId)}>Yes</button>
+                    <button id="delete-yes" class="delete-button" @click=${this.yesClickHandler}>Yes</button>
                     <button id="delete-no" class="delete-button" @click=${this.noClickHandler}>No</button>
                 </section>
             </section>
