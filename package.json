@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A food recipe suggestion site where you can input ingredients and possible recipes will be returned.",
   "scripts": {
+    "start": "cd bin && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
