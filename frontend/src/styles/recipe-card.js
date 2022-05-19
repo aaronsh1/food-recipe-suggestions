@@ -13,6 +13,7 @@ export const RecipeCardStyles = css`
     border-width: 1px;
     border-style: solid;
     background-color: white;
+    cursor: pointer;
   }
 
   aside {

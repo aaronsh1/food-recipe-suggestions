@@ -9,4 +9,5 @@ export * from './register';
 export * from './deleteModal';
 export * from './recipes';
 export * from './register';
+export * from './recipe-view
 export * from './navSidebar';
