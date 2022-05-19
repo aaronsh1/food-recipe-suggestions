@@ -100,5 +100,104 @@ export const HomeStyles = css`
 
   .random-images {
     z-index: 9;
+    height: 660px;
+  }
+
+  .random-images img {
+    padding: 10px 10px;
+  }
+
+  .knife-fork{
+    position: absolute;
+    top: 50px;
+    left: 200px;
+  }
+
+  .burger{
+    position: absolute;
+    top: 300px;
+    left: 80px;
+    height: 80px;
+  }
+
+  .pizza{
+    position: absolute;
+    top: 450px;
+    left: 220px;
+    height: 80px;
+  }
+
+  .cake{
+    position: absolute;
+    top: 550px;
+    left: 450px;
+    height: 80px;
+  }
+
+  .food-bowl{
+    position: absolute;
+    top: 500px;
+    left: 900px;
+    height: 70px;
+  }
+
+  .carrot{
+    position: absolute;
+    top: 550px;
+    right: 350px;
+    height: 90px;
+  }
+
+  .egg{
+    position: absolute;
+    top: 420px;
+    right: 180px;
+    height: 65px;
+  }
+
+  .wine-glasses{
+    position: absolute;
+    top: 200px;
+    right: 100px;
+    height: 80px;
+  }
+
+  .bread{
+    position: absolute;
+    top: 40px;
+    right: 200px;
+    height: 80px;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    background: #264653;
+    height: 152px;
+    padding: 15px 30px;
+  }
+
+  footer h1 {
+    font-size: 40px;
+    color: #264653;
+    -webkit-text-stroke: 1.5px #2A9D8F;
+  }
+
+  footer h1 img {
+    margin-right: 10px;
+    height: 40px;
+  }
+
+  footer section p {
+    color: #C3E1DE;
+  }
+  .bbd {
+    margin-top: 30px;
+  }
+
+  ul {
+    margin-top: 10px;
+    list-style: none;
+    color: #C3E1DE;
   }
 `;
