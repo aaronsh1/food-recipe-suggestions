@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const database = require('./database/datasource')
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -14,6 +15,7 @@ const ingredientRouter = require('./routes/ingredients');
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
