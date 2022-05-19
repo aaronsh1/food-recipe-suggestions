@@ -1,5 +1,5 @@
 const express = require("express");
-const recipeRouter = express();
+const recipeRouter = express.Router();
 const authMiddleware = require("../authMiddleware");
 const { ModelNames, findAll, create, findByPk, bulkCreate } = require("../database/datasource");
 const { Op } = require("sequelize");
