@@ -5,3 +5,4 @@ export * from './signin';
 export * from './pantry';
 export * from './favourites';
 export * from './profile';
+export * from './register';

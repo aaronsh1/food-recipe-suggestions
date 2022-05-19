@@ -1,11 +1,11 @@
 import { css } from 'lit';
 
 const maxWidth = css`
-  max-width: 350px;
+  max-width: 350px
 `;
 
-export const SignInStyles = css`
-  .signin-container {
+export const RegisterStyles = css`
+  .register-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
