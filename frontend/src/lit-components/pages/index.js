@@ -6,3 +6,4 @@ export * from './pantry';
 export * from './favourites';
 export * from './recipes';
 export * from './register';
+export * from './navSidebar';
