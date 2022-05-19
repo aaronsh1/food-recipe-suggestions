@@ -91,8 +91,7 @@ export const HomeStyles = css`
   .search-button {
     border: none;
     padding: 1px 5px;
-    background: rgba(255, 255, 255, 0.61);
-  }
+}
 
   .search-drumstick{
     height: 20px;
