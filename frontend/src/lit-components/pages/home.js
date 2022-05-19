@@ -28,12 +28,12 @@ export class Home extends LitElement {
         data: {
           name: searchValue
         },
-        method: 'GET',
+        method: 'POST',
       })
       .then(res => {
   
         if (res.status === 200) {
-          this.searchIds.push(res.data.record.id);
+          this.searchIds.push(res.data.IngredientId);
         }
       });
 
@@ -48,8 +48,8 @@ export class Home extends LitElement {
   };
 
   searchRecipes = () => {
-    const stringToSearch = queryString.stringify({search: this.searchValues}, {arrayFormat: 'comma'});
-    window.location.href = `/searchTemp?${stringToSearch}`;
+    const stringToSearch = queryString.stringify({search: this.searchIds});
+    window.location.href = `/searchTemp/?${stringToSearch}`;
   }
 
   render() {

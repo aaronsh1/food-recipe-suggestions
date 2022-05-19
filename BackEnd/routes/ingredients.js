@@ -42,16 +42,14 @@ ingredientRouter.get('/ingredient', async (req, res) => {
   }
 });
 
-ingredientRouter.get('/ingredient/id', async (req, res) => {
+ingredientRouter.post('/ingredient/id', async (req, res) => {
   try {
-    const name = req.query.name;
-    const record = await findOne(ModelNames.Ingredient, name);
-
-    if (!record) {
-      res.status(404).send('Ingredient not found');
-      return;
-    }
-
+    const data = req.body;
+    const record = await findOne(ModelNames.Ingredient, {
+      where: {
+        IngredientName: data.name
+      }
+    });
     res.send(record);
 
   } catch (err) {
