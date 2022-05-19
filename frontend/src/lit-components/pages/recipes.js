@@ -11,20 +11,24 @@ export class Recipes extends LitElement {
   constructor() {
     super();
 
-    this.recipesArr = this.getRecipes();
+    try {
+      let queryParamString = window.location.href.replace(/http(s)?:\/\/.+\?/, '') //Remove full route
+      let ingredientIds = queryParamString.split("&").map(param => param.split("=")[1]);
 
-    this.recipesArr.push(
-      {
-        RecipeId: 0,
-        RecipeName: "Lasagna2",
-        Description: "This is a very long and detailed description of how to make the above mentioned delicious food item.",
-        Image: "public/images/lily-banse--YHSwy6uqvk-unsplash.jpg",
-        Author: "Johann Schepers"  
-      }
-    )
+      ingredientIds.forEach(element => {
+        
+      });
+
+      this.recipe = this.getRecipe(recipeIdInt);
+
+    } catch {
+      this.redirectToRecipesPage();
+    }
+
+    this.recipesArr = this.getRecipes();
   }
 
-  getRecipes() {
+  getRecipes(ingredients) {
     return [
       {
         RecipeId: 0,
@@ -49,7 +53,6 @@ export class Recipes extends LitElement {
         
         <section class="pageHead">
           <h1>Browse Recipes...</h1>
-          <button>Add Recipe</button>
         </section>
 
         ${this.recipesArr.map(

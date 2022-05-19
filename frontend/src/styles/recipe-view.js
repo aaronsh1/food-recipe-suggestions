@@ -11,34 +11,32 @@ export const RecipeViewStyles= css`
     
     section {
         width: 70%;
+        padding: 15px;
+        margin: 20px;
+        margin-bottom: 0px;
+        border-radius: 5px;
+        border-color: #E9C46A;
+        border-width: 1px;
+        border-style: solid;
+        background-color: white;
     }
 
-    header {
-        width: 70%;
-        margin: 30px;
+    .header {
+        display: flex;
+        justify-content: space-between;
     }
 
-    .pageHead h1 {
-        margin: 0;
-        margin-left: 20px;
+    section h1 {
+        margin-top: 0px;
     }
 
-    .pageHead button {
-        font-weight: 250;
-        font-size: 16px;
-        color: #FFFFFF;
-        text-decoration: none;
-        margin-right: 20px;
-        padding: 9px 25px;
-        background-color: rgba(231,111,81,1);
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        float: right;
-        transition: all o.3s ease 0s;
-    }
-
-    button:hover {
-        background-color: rgba(231,111,81,0.5);
+    input[type=button] {
+        color: #264653;
+        width: 100px;
+        background: rgba(34, 170, 153, 0.43);
+        border: 1px solid #2A9D8F;
+        border-radius: 30px;
+        padding: 5px 8px;
+        margin: 7px 8px;
     }
 `;
