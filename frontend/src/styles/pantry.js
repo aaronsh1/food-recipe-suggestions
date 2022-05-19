@@ -25,6 +25,11 @@ pantry-ingredient {
     padding: 5% 3%;
 }
 
+.ingredient.ingredient-block{
+    background-color: #E45C3A;
+
+}
+
 pantry-ingredient:hover {
     filter:grayscale(0);
     transition: 0.5s;
@@ -57,6 +62,31 @@ body {
     box-shadow: grey 0.4em 0.4em 1em;
     transition: 0.3s;
 }
+
+#search-button {
+    margin: auto;
+    color: white;
+    border-radius: 20%;
+    background-color: #E76F51;
+    border: none;
+
+    position: fixed;
+    
+    float: right;
+    z-index: 1;
+    box-shadow: grey 0.4em 0.4em 1em;
+    transition: 0.3s;
+}
+
+#search-bar {
+    right:10%
+}
+
+#search-button:hover {
+    background-color: #EE9781;
+    transition: 0.3s;
+}
+
 
 #add-ingredient-fab:hover {
     background-color: #EE9781;

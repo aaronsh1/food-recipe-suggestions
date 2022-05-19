@@ -4,17 +4,16 @@ import { IngredientStyles } from '../../styles/ingredient';
 export class PantryIngredient extends LitElement {
     static styles = IngredientStyles;
 
-    static properties = {
-        id: 0,
-        name: "",
-        image: ""
+    static get properties()  {
+        return {
+        name: {type: String},
+        image: {type: String},
+        selected: {type: Boolean}
+        }
     }
 
-    constructor(id, name, image) {
+    constructor() {
         super();
-        this.id = id;
-        this.name = name;
-        this.image = image;
     }
 
     deleteIngredient = () => {
@@ -29,17 +28,23 @@ export class PantryIngredient extends LitElement {
         //     console.log(err);
         // })
 
-        console.log(`delete ingredient: ${this.id}`);
+        //console.log(`delete ingredient: ${this.id}`);
     }
+
+
 
     render() {
         return html `
-        <article class="ingredient-block">
+        <article @click='${this.changeColor}' class="ingredient-block ${this.selected ? 'selected' : 'unselected'}">
             <button alt="delete icon" class="delete-ingredient"><img src="/public/images/ingredients/delete.png" @click=${this.deleteIngredient}/></button>
             <img src=${this.image} alt="ingredient-pic"  class="ingredient-pic"/>
             <footer class="ingredient-name">${this.name}</footer>
         </article>
         `
+    }
+
+    changeColor() {
+        this.selected = !this.selected;
     }
 }
 

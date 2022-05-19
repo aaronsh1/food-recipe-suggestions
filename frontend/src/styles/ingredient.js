@@ -5,13 +5,26 @@ export const IngredientStyles = css `
         height: 80%;
         border: none;
         border-radius: 15px;
-        background-color: #E9C46A;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         margin: 3%;
         box-shadow: #c18800 0.6em 0.6em 0.5em;
         padding: 10% 0;
+    }
+
+    .unselected {
+        background-color: #E9C46A;
+    }
+
+    .selected {
+
+        background-color: #2a9d8f;
+
+    }
+
+    .clicked {
+        background-color: blue;
     }
     .ingredient-pic {
         width: 40%;
