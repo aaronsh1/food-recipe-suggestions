@@ -72,6 +72,11 @@ const findAll = async (modelName, options = {}) => {
   return await model.findAll(options);
 }
 
+const findOne = async (modelName, options ={}) => {
+  const model = getModelDefinitions()[modelName];
+  return await model.findOne(options);
+}
+
 const findByPk = async (modelName, pk) => {
   const model = getModelDefinitions()[modelName];
   return await model.findByPk(pk);
@@ -95,6 +100,7 @@ module.exports = {
   update,
   destroy,
   findAll,
+  findOne,
   findByPk,
   query,
   getModelDefinitions,

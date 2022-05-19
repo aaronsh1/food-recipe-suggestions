@@ -6,3 +6,4 @@ export * from './app-root';
 export * from './profile';
 export * from './nav';
 export * from './recipes';
+export * from './register';
