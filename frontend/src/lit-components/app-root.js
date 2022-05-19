@@ -28,6 +28,9 @@ export class AppRoot extends LitElement {
         page = html`<home-page></home-page>`; 
         break;
 
+        case 'favourites': 
+        page = html`<favourites-page></favourites-page>`; 
+        break;
         case 'profile': 
         page = html`<profile-page class='profile'></profile-page>>`; 
         break;

@@ -1,3 +1,5 @@
 export * from './home';
-export * from './profile'
 export * from './nav';
+export * from './favourites'
+export * from './profile'
+
