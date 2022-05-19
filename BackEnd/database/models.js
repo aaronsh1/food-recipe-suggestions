@@ -48,9 +48,6 @@ const Models = {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Category: {
-      type: DataTypes.INTEGER,
-    },
     Image: {
       type: DataTypes.STRING,
     },

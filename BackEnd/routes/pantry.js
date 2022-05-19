@@ -41,15 +41,19 @@ pantryRouter.get("/pantry", async (req, res) => {
 
 pantryRouter.post("/pantry", async (req, res) => {
     try{
+        console.log("starting post");
         let userId = req.UserId;
         let ingredients = [...req.body.Ingredients];
+        console.log(ingredients);
     
-        await bulkCreate(ModelNames.Pantry, ingredients.map(
+        const data = await bulkCreate(ModelNames.Pantry, ingredients.map(
             item => ({UserId: userId, IngredientId: item})
         ));
-    
-        res.send();
+
+        console.log("DONE");
+        res.send(data);
     }catch(err) {
+        console.log(err);
         res.status(500).send(err);
     }
 
@@ -58,7 +62,7 @@ pantryRouter.post("/pantry", async (req, res) => {
 pantryRouter.delete("/pantry", async (req, res) => {
     try{
         let userId = req.UserId;
-        let ingredientsToDelete = [...req.query.ingredients];
+        let ingredientsToDelete = [...req.body.IngredientId];
     
         if(ingredientsToDelete.length == 1) {
             await deleteIngredient(userId, ingredientsToDelete[0])
@@ -75,7 +79,7 @@ pantryRouter.delete("/pantry", async (req, res) => {
 
 
 const deleteIngredient = async (userId, ingredientId) => {
-    await destroy(ModelNames.Pantry, {
+    const data = await destroy(ModelNames.Pantry, {
         where:{
             [Op.and]: [
                 {UserId: userId},
@@ -83,5 +87,7 @@ const deleteIngredient = async (userId, ingredientId) => {
             ]
         }
     })
+
+    return data;
 }
 module.exports = pantryRouter;
