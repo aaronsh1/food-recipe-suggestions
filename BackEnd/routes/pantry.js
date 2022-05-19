@@ -1,8 +1,7 @@
 const express = require("express");
 const pantryRouter = express.Router();
-const { ModelNames, findAll } = require("../database/datasource");
+const { ModelNames, findAll, bulkCreate, destroy } = require("../database/datasource");
 const { Op } = require("sequelize");
-
 
 pantryRouter.get("/pantry", async (req, res) => {
     let userId = req.query.id;
@@ -30,15 +29,10 @@ pantryRouter.post("/pantry", (req, res) => {
     let userId = req.query.id;
     let ingredients = [...req.query.ingredients];
     
+    await bulkCreate(ModelNames.Pantry, ingredients.map(
+        item => ({UserId: userId, IngredientId: item})
+    ));
 
-    res.send("ok");
-})
-
-pantryRouter.put("/pantry", (req, res) => {
-    let userId = req.query.id;
-    let ingredientsToAdd = [...req.query.ingredients];
-
-    // add ingredients to db
     res.send("ok");
 })
 
@@ -46,6 +40,22 @@ pantryRouter.delete("/pantry", (req, res) => {
     let userId = req.query.id;
     let ingredientsToDelete = [...req.query.ingredients];
 
-    // delete relevant ingredients from db
+    if(ingredientsToDelete.length == 1) {
+        deleteIngredient(userId, ingredientsToDelete[0])
+    } else {
+        ingredientsToDelete.forEach(ingredient => deleteIngredient(userId, ingredient))
+    }
+    
     res.send("ok");
 })
+
+const deleteIngredient = (userId, ingredientId) => {
+    await destroy(ModelNames.pantry, {
+        where:{
+            [Op.and]: [
+                {UserId: userId},
+                {IngredientId: ingredientId}
+            ]
+        }
+    })
+}
