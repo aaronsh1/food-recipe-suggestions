@@ -1,10 +1,13 @@
 const express = require("express");
+const authMiddleware = require("../authMiddleware");
 const pantryRouter = express();
 
+pantryRouter.use(authMiddleware);
+
 pantryRouter.get("/pantry", (req, res) => {
-    let userId = req.query.id;
-    
-    let inventory
+    let userId = req.UserId;
+
+    let inventory;
     // perform query on db to get inventory
 
     res.send(inventory);
@@ -32,3 +35,5 @@ pantryRouter.delete("/pantry", (req, res) => {
     // delete relevant ingredients from db
     res.send("ok");
 })
+
+module.exports = pantryRouter;
