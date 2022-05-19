@@ -1,5 +1,7 @@
 import { html, LitElement } from 'lit';
 
+import { fetchApi } from '../../api/fetchApi';
+
 import {ProfileStyles } from '../../styles';
 export class Profile extends LitElement {
   static styles = ProfileStyles;
@@ -8,16 +10,37 @@ export class Profile extends LitElement {
   static get properties() {
     return {
       showPasswordChangeInputs: {type:Boolean},
-      collapseBanner: {type:Boolean}
+      collapseBanner: {type:Boolean},
+      profile: {},
+      user: {},
     };
   }
 
 
   constructor() {
     super();
+    this.testString = 'username';
+
+
+
+    this.user = undefined; 
+
+    fetchApi({
+      endpoint: 'profile',
+      method: 'GET',
+      token: window.localStorage.getItem('token'),
+    })
+    .then(res => {
+      if (res.status === 200) {
+        this.user = res.data;
+      }
+    })
+    .catch();
     this.showPasswordChangeInputs = false
     this.collapseBanner = false;
   }
+
+
 
 
 
@@ -32,11 +55,17 @@ export class Profile extends LitElement {
     
         <form class='form-style'>
                 
-            <label>Username</label><br>
-            <input class='input-style' type='text'><br><br>
+         
+            ${this.user ? html` 
 
+            <label>Username</label><br>
+            <input class='input-style' type='text' .value="${this.user.Username}"><br><br>
             <label>Email</label><br>
             <input class='input-style' type='email'><br><br>
+            
+            ` : ''}
+
+
 
             <button class='text-button' class='${!this.showPasswordChangeInputs ? 'text-button' : 'hide'}' @click="${this._changePasswordClick}" type='button'>Change password?</button><br>
 
@@ -68,6 +97,8 @@ export class Profile extends LitElement {
     this.showPasswordChangeInputs = true;
     this.collapseBanner = true;
 }
+
+
 
 _discard(e) {
     this.showPasswordChangeInputs = false;
