@@ -1,4 +1,6 @@
-const backendUrl = 'http://localhost:3000' //TODO: Get from dotenv
+import config from '../../config.json';
+
+const backendUrl = config.backendUrl;
 
 export const Endpoints = {
   Login: 'login',

@@ -1,2 +1,3 @@
 node_modules
+/bin
 food-app-key.pem

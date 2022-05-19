@@ -43,7 +43,7 @@ export class SignIn extends LitElement {
         <input class="input" .value=${this.username} @change="${(e) => {this.username = e.target.value;}}"/>
 
         <label class="label">Password</label>
-        <input class="input" .value=${this.password} @change="${(e) => {this.password = e.target.value;}}"/>
+        <input type="password" class="input" .value=${this.password} @change="${(e) => {this.password = e.target.value;}}"/>
 
         <button class="button" @click="${this.buttonOnClick}">
           Login

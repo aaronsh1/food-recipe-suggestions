@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
   const token = req.headers.authorization;
   const decodedToken = verify(token);
 
-  if (decodedToken?.UserId) {
+  if (!!decodedToken && !!decodedToken.UserId) {
     req.UserId = decodedToken.UserId;
     next();
 
