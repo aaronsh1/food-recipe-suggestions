@@ -17,7 +17,7 @@ export const NavStyles = css`
 
     header {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         padding: 30px 2.5%;
     }
@@ -25,6 +25,7 @@ export const NavStyles = css`
     .navbar {
         display: flex;
         margin-right: auto;
+        justify-content: space-around;
     }
 
     .navMenu {
@@ -83,9 +84,13 @@ export const NavStyles = css`
             position: fixed;
         }
 
-        .burger {
+        .burger, .navbar-pic {
             display: block;
             width: 20%;
+        }
+
+        .navbar-pic img {
+            width: 100%;
         }
 
         nav-sidebar {
@@ -96,6 +101,10 @@ export const NavStyles = css`
             background-color: #FF7C0A;
             right: 0px;
             width: 60%;
+        }
+
+        .navbar {
+            display: none;
         }
     }
 

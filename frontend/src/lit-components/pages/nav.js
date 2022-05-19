@@ -29,9 +29,12 @@ export class NavBar extends LitElement {
     render() {
         return html`
         <header id="this-navbar">
-            <a href="/profile" id="profile">
+            <a href="/profile" class="navbar-pic" id="profile">
                 <img src="/public/images/userprofile.svg" alt="profile">
             </a>
+
+            <img src="/public/images/burger-solid.svg" class="burger navbar-pic" @click=${this.displayBurgerMenu}/>
+
             <nav class="navbar">
                 <ul class="navMenu">
                     <li><a href="/home" class="navItem hide">Home</a></li>
@@ -40,18 +43,16 @@ export class NavBar extends LitElement {
                     <li><a href="/profile" class="navItem hide">Profile</a></li>
                     <li><a href="/recipes" class="navItem hide">Recipes</a></li>
                 </ul>
-                <a href="/register" id="signup" class="hide"><button>Sign-up</button></a>
-                <a href="/login" class="hide"><button>Login</button></a>
-                <a href="/home" class="hide"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
-                <img src="/public/images/burger-solid.svg" class="burger" @click=${this.displayBurgerMenu}/>
+                
             </nav>
 
             ${(!window.localStorage.getItem("token"))? 
-                html`<a href="/register" id="signup"><button>Sign-up</button></a><a href="/login"><button>Login</button></a>` : 
+                html`<a href="/register" id="signup" class="hide"><button>Sign-up</button></a>
+                        <a href="/login" class="hide"><button>Login</button></a>` : 
                 html`<button @click="${() => this.handleLogout()}">Logout</button>`
             }
             
-            <a href="/home"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
+            <a href="/home" class="hide"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
         </header>
         `;
     }
