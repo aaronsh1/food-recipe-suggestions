@@ -20,6 +20,11 @@ export class NavBar extends LitElement {
         // navSide = thisNav.createElement("nav-sidebar");
         console.log("added");
     }
+      
+    handleLogout() {
+        window.localStorage.removeItem('token');
+        window.location.href = "/login"
+    }
 
     render() {
         return html`
@@ -40,6 +45,13 @@ export class NavBar extends LitElement {
                 <a href="/home" class="hide"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
                 <img src="/public/images/burger-solid.svg" class="burger" @click=${this.displayBurgerMenu}/>
             </nav>
+
+            ${(!window.localStorage.getItem("token"))? 
+                html`<a href="/register" id="signup"><button>Sign-up</button></a><a href="/login"><button>Login</button></a>` : 
+                html`<button @click="${() => this.handleLogout()}">Logout</button>`
+            }
+            
+            <a href="/home"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
         </header>
         `;
     }
