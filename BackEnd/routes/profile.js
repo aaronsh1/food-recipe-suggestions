@@ -26,10 +26,10 @@ catch(err) {
 }
 });
 
-profileRouter.post("/profile", (req, res) => {
+profileRouter.post("/profile/setEmail", (req, res) => {
     try {
-    let userId = req.query.id;
-    let ingredients = [...req.query.ingredients];
+    let userId = req.user.id;
+    let Email = [...req.Email];
     
 
     res.send("ok");

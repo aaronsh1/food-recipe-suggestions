@@ -159,6 +159,10 @@ _apply(e) {
   {
     var formUsername = this.shadowRoot.getElementById("username").value;
     var formEmail= this.shadowRoot.getElementById("email").value;
+    if (formEmail !== this.user.Email)
+    {
+      this.changeEmail(formEmail);
+    }
   
   }
 
@@ -167,6 +171,25 @@ console.log(this.user.Username);
 
   //const hashPassword = crypto.createHash('sha256').update(password + data.Salt).digest("hex")
   
+}
+
+
+
+
+changeEmail(email) {
+  fetchApi({
+    endpoint: 'profile/setEmail',
+    data: {
+      Username: this.user.UserId,
+      Email: email ,
+    },
+    method: 'POST',
+  })
+  .then(res => {
+
+    if (res.status === 200) {
+    }
+  });
 }
 }
 customElements.define('profile-page', Profile);
