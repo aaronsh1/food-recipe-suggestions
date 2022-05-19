@@ -1,10 +1,11 @@
 const fs   = require('fs');
 const jwt   = require('jsonwebtoken');
 
-var privateKEY  = fs.readFileSync('./keys/private.key', 'utf8');
-var publicKEY  = fs.readFileSync('./keys/public.key', 'utf8');  
+var privateKEY  = fs.readFileSync(__dirname + '/keys/private.key', 'utf8');
+var publicKEY  = fs.readFileSync(__dirname + '/keys/public.key', 'utf8');
 module.exports = {
  sign: (payload, $Options) => {
+   console.log('Started signing');
 
   // Token signing options
   var signOptions = {
@@ -12,7 +13,7 @@ module.exports = {
       subject:  $Options.subject,
       audience:  $Options.audience,
       expiresIn:  "30d",    // 30 days validity
-      algorithm:  "RS256"    
+      algorithm:  "RS256"
   };
   return jwt.sign(payload, privateKEY, signOptions);
 },

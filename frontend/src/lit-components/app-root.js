@@ -1,5 +1,6 @@
-import { html, LitElement, css } from 'lit';
+import { html, LitElement } from 'lit';
 import {AppRootStyles} from '../styles';
+
 export class AppRoot extends LitElement {
   static styles = AppRootStyles
 
@@ -32,12 +33,18 @@ export class AppRoot extends LitElement {
         page = html`<profile-page class='profile'></profile-page>>`;
         break;
 
+        case 'login':
+        page = html`<sign-in></sign-in>`;
+        break;
+
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
 
     return html`
-      <nav-bar></nav-bar>
-      ${page}
+      <section class="app-root">
+        <nav-bar></nav-bar>
+        ${page}
+      </section>
     `;
   }
 }

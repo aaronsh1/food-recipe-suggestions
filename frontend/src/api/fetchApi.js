@@ -1,4 +1,4 @@
-const backendUrl = 'https://localhost:8081' //TODO: Get from dotenv
+const backendUrl = 'http://localhost:3000' //TODO: Get from dotenv
 
 export const Endpoints = {
   Login: 'login',
@@ -26,5 +26,9 @@ export const fetchApi = async ({
     body: JSON.stringify(data),
   });
 
-  return await response.json();
+  const json = await response.json();
+  return {
+    data: json,
+    status: response.status,
+  };
 };
