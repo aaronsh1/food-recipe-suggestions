@@ -1,7 +1,7 @@
 import { html, LitElement, css } from 'lit';
-
+import {AppRootStyles} from '../styles';
 export class AppRoot extends LitElement {
-  static styles = css``;
+  static styles = AppRootStyles
 
   static properties = {
 
@@ -21,10 +21,19 @@ export class AppRoot extends LitElement {
       route = route.substring(0, route.length - 1);
     }
 
+    let page;
+
     switch (route) {
-      case 'home': return html`
-        <home-page></home-page>
-      `;
+      case 'home': 
+        page = html`<home-page></home-page>`; 
+        break;
+
+        case 'favourites': 
+        page = html`<favourites-page></favourites-page>`; 
+        break;
+        case 'profile': 
+        page = html`<profile-page class='profile'></profile-page>>`; 
+        break;
 
       case 'pantry': return html`
         <pantry-a></pantry-a>
@@ -32,6 +41,11 @@ export class AppRoot extends LitElement {
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
+
+    return html`
+      <nav-bar></nav-bar>
+      ${page}
+    `;
   }
 }
 customElements.define('app-root', AppRoot);
