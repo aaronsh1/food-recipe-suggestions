@@ -23,7 +23,6 @@ export class AppRoot extends LitElement {
     }
 
     let page;
-    
 
     switch (route) {
       case 'home':
@@ -60,6 +59,10 @@ export class AppRoot extends LitElement {
 
       case 'register':
         page = html`<register-page></register-page>`;
+        break;
+      
+      case 'searchTemp':
+        page = html`<search-temp></search-temp>`
         break;
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
