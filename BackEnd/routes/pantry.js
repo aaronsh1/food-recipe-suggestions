@@ -1,5 +1,6 @@
 const express = require("express");
-const pantryRouter = express.Router();
+const pantryRouter = express();
+const authMiddleware = require("../authMiddleware");
 const { ModelNames, findAll, bulkCreate, destroy } = require("../database/datasource");
 const { Op } = require("sequelize");
 
@@ -49,6 +50,7 @@ pantryRouter.delete("/pantry", (req, res) => {
     res.send("ok");
 })
 
+
 const deleteIngredient = (userId, ingredientId) => {
     await destroy(ModelNames.pantry, {
         where:{
@@ -59,3 +61,4 @@ const deleteIngredient = (userId, ingredientId) => {
         }
     })
 }
+module.exports = pantryRouter;
