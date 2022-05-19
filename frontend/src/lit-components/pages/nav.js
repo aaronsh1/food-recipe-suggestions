@@ -23,7 +23,7 @@ export class NavBar extends LitElement {
                 <ul class="navMenu">
                     <li><a href="#" class="navItem">Home</a></li>
                     <li><a href="#" class="navItem">Search</a></li>
-                    <li><a href="#" class="navItem">Favourites</a></li>
+                    <li><a href="favourites" class="navItem">Favourites</a></li>
                 </ul>
             </nav>
             <a href="#" id="signup"><button>Sign-up</button></a>
