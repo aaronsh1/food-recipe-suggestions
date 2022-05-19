@@ -1,54 +1,39 @@
-import {html, css, LitElement} from 'lit';
+import {html, LitElement} from 'lit';
+import { IngredientStyles } from '../../styles/ingredient';
 
 export class PantryIngredient extends LitElement {
-    static styles = css `
-    .ingredient-block {
-        height: 80%;
-        border: none;
-        border-radius: 15px;
-        background-color: #E9C46A;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        margin: 3%;
-        box-shadow: #c18800 0.6em 0.6em 0.5em;
-        padding: 10% 0;
-    }
-    .ingredient-pic {
-        width: 40%;
-        margin: auto;
-    }
-
-    .delete-ingredient {
-        width: 20%;
-        margin: 5%;
-        position: relative;
-        float: left;
-    }
-    .ingredient-name {
-        margin: auto 0;
-        width: 100%;
-        text-align: center;
-        background-color: #FFECBD;
-        padding: 3% 0;
-    }
-    `;
+    static styles = IngredientStyles;
 
     static properties = {
+        id: null,
         name: "",
         image: ""
     }
 
-    constructor(name, image) {
+    constructor(id, name, image) {
         super();
+        this.id = id;
         this.name = name;
         this.image = image;
+    }
+
+    deleteIngredient = (ingredientId) => {
+        fetch(apiUrl, {
+            method: "DELETE",
+            body: ingredientId
+        })
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     render() {
         return html `
         <article class="ingredient-block">
-            <input type=image src="/images/ingredients/delete.png" alt="delete icon" class="delete-ingredient"/>
+            <button alt="delete icon" class="delete-ingredient"><img src="/public/images/ingredients/delete.png" @click=${this.deleteIngredient(this.id)}/></button>
             <img src=${this.image} alt="ingredient-pic"  class="ingredient-pic"/>
             <footer class="ingredient-name">${this.name}</footer>
         </article>
