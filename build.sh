@@ -25,7 +25,7 @@ cp -r "./backend/routes" "./bin/routes"
 cp -r "./backend/app.js" "./bin/app.js"
 cp -r "./backend/authMiddleware.js" "./bin/authMiddleware.js"
 cp -r "./backend/package.json" "./bin/package.json"
-cp -r "./prod.env" "./bin/.env"
+cp -r "./backend/.env" "./bin/.env"
 
 cd "./bin"
 echo "Installing modules"
