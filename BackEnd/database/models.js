@@ -1,8 +1,21 @@
 const { DataTypes } = require('sequelize');
 
+const ModelNames = {
+  User: 'User',
+  Pantry: 'Pantry',
+  Ingredient: 'Ingredient',
+  RecipeIngredients: 'RecipeIngredients',
+  UserFavourite: 'UserFavourite',
+  Recipe: 'Recipe',
+}
+
+//TODO: Define getters and setters on relevant fields
+//https://sequelize.org/docs/v6/core-concepts/getters-setters-virtuals/
+//TODO: Validation
+//https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/
 const Models = {
   User: {
-    Id: {
+    UserId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -26,22 +39,61 @@ const Models = {
   },
 
   Pantry: {
-    User: {
+    UserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'UserId',
+      },
     },
-    Ingredient: {
+    IngredientId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Ingredients',
+        key: 'IngredientId',
+      },
     },
   },
 
   Ingredient: {
-
+    IngredientId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    IngredientName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Category: {
+      type: DataTypes.INTEGER,
+    },
+    Image: {
+      type: DataTypes.STRING,
+    },
   },
 
   RecipeIngredients: {
-
+    RecipeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'recipeIngredientIndex',
+      references: {
+        model: 'Recipes',
+        key: 'RecipeId',
+      },
+    },
+    IngredientId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: 'recipeIngredientIndex',
+      references: {
+        model: 'Ingredients',
+        key: 'IngredientId',
+      },
+    },
   },
 
   UserFavourite: {
@@ -50,7 +102,7 @@ const Models = {
       allowNull: false,
       unique: 'userFavIndex',
       references: {
-        model: User,
+        model: 'Users',
         key: 'UserId'
       }
     },
@@ -60,7 +112,7 @@ const Models = {
       allowNull: false,
       unique: 'userFavIndex',
       references: {
-        model: Recipe,
+        model: 'Recipes',
         key: 'RecipeId'
       }
     },
@@ -74,6 +126,7 @@ const Models = {
   Recipe: {
     RecipeId: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       allowNull: false,
       autoIncrement: true
     },
@@ -107,4 +160,5 @@ const Models = {
 
 module.exports = {
   Models,
+  ModelNames,
 };

@@ -34,4 +34,19 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+database.initialize()
+.then(() => {
+
+  database.sync()
+  .then(() => {
+    console.log('Database connected and synced');
+  })
+  .catch(error => {
+    throw error;
+  });
+})
+.catch(error => {
+  throw error;
+});
+
 module.exports = app;
