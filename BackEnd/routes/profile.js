@@ -26,7 +26,7 @@ catch(err) {
 }
 });
 
-profileRouter.post("/profile/setEmail", (req, res) => {
+profileRouter.post("/profile/", (req, res) => {
     try {
     let userId = req.user.id;
     let Email = [...req.Email];
