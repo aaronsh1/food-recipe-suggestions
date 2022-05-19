@@ -1,20 +1,20 @@
 import { html, LitElement } from 'lit';
 import queryString from 'query-string';
-
+import { fetchApi } from '../../api/fetchApi';
 import { HomeStyles } from '../../styles';
 
 export class Home extends LitElement {
   static styles = HomeStyles;
 
   static properties = {
-    searchValues: [],
+    searchIds: [],
     chips: html
   }
 
   constructor() {
     super();
 
-    this.searchValues = [];
+    this.searchIds = [];
     this.chips = html``;
   }
 
@@ -22,21 +22,34 @@ export class Home extends LitElement {
     if(e.key === "Enter"){
       const searchValue = this.shadowRoot.getElementById('searchBar').value;
       console.log(searchValue);
+
+      fetchApi({
+        endpoint: 'ingredient/id',
+        data: {
+          name: searchValue
+        },
+        method: 'POST',
+      })
+      .then(res => {
+  
+        if (res.status === 200) {
+          this.searchIds.push(res.data.IngredientId);
+        }
+      });
+
       this.shadowRoot.getElementById('searchBar').value = null;
-      this.searchValues.push(searchValue);
-      console.log(this.searchValues);
+      
+      console.log(this.searchIds);
       this.chips = html`
                 ${this.chips}
                 <input type="button" value=${searchValue}>
               `;
-
-
     }
   };
 
   searchRecipes = () => {
-    const stringToSearch = queryString.stringify({search: this.searchValues}, {arrayFormat: 'bracket'});
-    window.location.href = `/searchTemp?${stringToSearch}`;
+    const stringToSearch = queryString.stringify({search: this.searchIds});
+    window.location.href = `/recipes/?${stringToSearch}`;
   }
 
   render() {
