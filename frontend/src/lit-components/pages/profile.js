@@ -13,8 +13,6 @@ export class Profile extends LitElement {
       collapseBanner: {type:Boolean},
       profile: {},
       user: {},
-      testString: {},
-      Username: {},
     };
   }
 
@@ -27,19 +25,19 @@ export class Profile extends LitElement {
 
     this.user = undefined; 
 
-    // fetchApi({
-    //   endpoint: 'profile',
-    //   method: 'GET',
-    //   token: window.localStorage.getItem('token'),
-    // })
-    // .then(res => {
-    //   if (res.status === 200) {
-    //     this.profile = res.data;
-    //   }
-    // })
-    // .catch();
-    // this.showPasswordChangeInputs = false
-    // this.collapseBanner = false;
+    fetchApi({
+      endpoint: 'profile',
+      method: 'GET',
+      token: window.localStorage.getItem('token'),
+    })
+    .then(res => {
+      if (res.status === 200) {
+        this.user = res.data;
+      }
+    })
+    .catch();
+    this.showPasswordChangeInputs = false
+    this.collapseBanner = false;
   }
 
 
@@ -55,13 +53,11 @@ export class Profile extends LitElement {
 
     <section class='profile-container'>
     
-    <button @click="${this._testButton}">click</button>
-
         <form class='form-style'>
                 
          
             ${this.user ? html` 
-            
+
             <label>Username</label><br>
             <input class='input-style' type='text' .value="${this.user.Username}"><br><br>
             <label>Email</label><br>
@@ -102,19 +98,7 @@ export class Profile extends LitElement {
     this.collapseBanner = true;
 }
 
-_testButton(e) {
 
-  this.user = {    
-    UserId: 1,
-    Username: this.testString,
-    Password: 'something',
-    Salt: 'salt',
-    Email: 'something@gmail.com',
-  };
-  this.testString = this.testString + this.testString;
-  //this.user.Username = this.user.Username + "extra";
-  console.log(this.user.Username);
- }
 
 _discard(e) {
     this.showPasswordChangeInputs = false;
