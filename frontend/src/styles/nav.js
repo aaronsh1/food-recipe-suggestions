@@ -56,10 +56,6 @@ export const NavStyles = css`
     button:hover {
         background-color: rgba(231,111,81,0.5);
     }
-
-    #signup {
-        margin-left: auto;
-    }
     
     #profile {
         margin-right: 10px;
@@ -67,5 +63,9 @@ export const NavStyles = css`
 
     .logo {
         margin-left: 20px;
+    }
+
+    .navbar {
+        margin-right: auto;
     }
 `;

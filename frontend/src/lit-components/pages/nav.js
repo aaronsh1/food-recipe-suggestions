@@ -28,8 +28,9 @@ export class NavBar extends LitElement {
                     <li><a href="/recipes" class="navItem">Recipes</a></li>
                 </ul>
             </nav>
-            <a href="/register" id="signup"><button>Sign-up</button></a>
-            <a href="/login"><button>Login</button></a>
+
+            ${(!window.localStorage.getItem("token"))? html`<a href="/register" id="signup"><button>Sign-up</button></a><a href="/login"><button>Login</button></a>` : ""}
+            
             <a href="/home"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
         </header>
         `;
