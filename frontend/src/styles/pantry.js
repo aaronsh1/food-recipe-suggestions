@@ -10,6 +10,14 @@ export const PantryStyles = css`
     margin: auto;
 }
 
+* {
+    text-align: center;
+}
+
+pantry-a {
+    background-color: black;
+}
+
 pantry-ingredient {
     width: 10em;
     filter: grayscale(60%);
