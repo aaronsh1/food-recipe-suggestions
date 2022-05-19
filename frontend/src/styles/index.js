@@ -7,3 +7,5 @@ export * from './profile';
 export * from './nav';
 export * from './register';
 export * from './deleteModal';
+export * from './recipes';
+export * from './register';
