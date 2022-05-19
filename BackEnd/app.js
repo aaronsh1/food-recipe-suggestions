@@ -8,6 +8,8 @@ const dotenv = require('dotenv');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const pantryRouter = require('./routes/pantry');
+const recipeRouter = require('./routes/recipes');
+const ingredientRouter = require('./routes/ingredients');
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', pantryRouter);
+app.use('/', recipeRouter);
+app.use('/', ingredientRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

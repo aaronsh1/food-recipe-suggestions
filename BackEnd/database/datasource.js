@@ -26,7 +26,7 @@ const initialize = async () => {
     dialect: 'mysql',
     pool: {
       max: 1,
-    }
+    },
   });
 
   await sequelize.authenticate();
@@ -38,12 +38,9 @@ const getSequelizeInstance = async () => {
 
 const sync = async () => {
   const defs = Object.values(getModelDefinitions());
-
-  return await Promise.all(defs.map(model => {
-    return new Promise(async () => {
-      await model.sync();
-    });
-  }));
+  defs.forEach(async model => {
+    await model.sync();
+  });
 };
 
 const close = async () => {
