@@ -17,13 +17,13 @@ export class Pantry extends LitElement {
 
     getPantry = () => {
         let pantrySection = document.querySelector("#ingredient-pantry");
-        fetch(apiUrl+"/pantry", new URLSearchParams({
-            id: 1,
-        }))
-        .then(response => response.json())
-        .then(data.map(
-            ingredient => this.ingredientArr.add(ingredient)
-        ));
+        // fetch(apiUrl+"/pantry", new URLSearchParams({
+        //     id: 1,
+        // }))
+        // .then(response => response.json())
+        // .then(data.map(
+        //     ingredient => this.ingredientArr.add(ingredient)
+        // ));
     
         const ingredientArr = [
             {

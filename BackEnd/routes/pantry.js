@@ -7,49 +7,70 @@ const { Op } = require("sequelize");
 pantryRouter.use(authMiddleware);
 
 pantryRouter.get("/pantry", async (req, res) => {
-    let userId = req.UserId;
 
-    let ingredientIds = (await findAll(ModelNames.Pantry, {
-        where: {
-            UserId: userId
-        }
-    })).dataValues;
+    try{
+        let userId = req.UserId;
 
-    let pantry = findAll(ModelNames.Ingredient, {
-        where: {
-            IngredientId: {
-                [Op.in]: ingredientIds.map(
-                    item => item.IngredientId
-                )
+        let ingredientIds = (await findAll(ModelNames.Pantry, {
+            where: {
+                UserId: userId
             }
-        }
-    }).dataValues;
+        })).map(
+            item => item.dataValues
+        );
+    
+        let pantry = (await findAll(ModelNames.Ingredient, {
+            where: {
+                IngredientId: {
+                    [Op.in]: ingredientIds.map(
+                        item => item.IngredientId
+                    )
+                }
+            }
+        })).map(
+            item => item.dataValues
+        );
+    
+        res.send(pantry);
+    } catch(err) {
+        res.status(500).send(err);
+    }
 
-    res.send(pantry);
+
 })
 
 pantryRouter.post("/pantry", async (req, res) => {
-    let userId = req.UserId;
-    let ingredients = [...req.query.ingredients];
+    try{
+        let userId = req.UserId;
+        let ingredients = [...req.body.Ingredients];
+    
+        await bulkCreate(ModelNames.Pantry, ingredients.map(
+            item => ({UserId: userId, IngredientId: item})
+        ));
+    
+        res.send();
+    }catch(err) {
+        res.status(500).send(err);
+    }
 
-    await bulkCreate(ModelNames.Pantry, ingredients.map(
-        item => ({UserId: userId, IngredientId: item})
-    ));
-
-    res.send("ok");
 })
 
 pantryRouter.delete("/pantry", async (req, res) => {
-    let userId = req.UserId;
-    let ingredientsToDelete = [...req.query.ingredients];
-
-    if(ingredientsToDelete.length == 1) {
-        await deleteIngredient(userId, ingredientsToDelete[0])
-    } else {
-        ingredientsToDelete.forEach(ingredient => deleteIngredient(userId, ingredient))
+    try{
+        let userId = req.UserId;
+        let ingredientsToDelete = [...req.query.ingredients];
+    
+        if(ingredientsToDelete.length == 1) {
+            await deleteIngredient(userId, ingredientsToDelete[0])
+        } else {
+            ingredientsToDelete.forEach(ingredient => deleteIngredient(userId, ingredient))
+        }
+    
+        res.send();
+    }catch(err) {
+        res.status(500).send(err);
     }
 
-    res.send("ok");
 })
 
 
