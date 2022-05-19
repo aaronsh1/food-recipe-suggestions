@@ -197,4 +197,9 @@ export const HomeStyles = css`
     list-style: none;
     color: #C3E1DE;
   }
+
+  #chips-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `;

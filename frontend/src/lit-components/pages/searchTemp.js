@@ -15,8 +15,16 @@ export class SearchTemp extends LitElement {
 
     getQueryParams = () => {
         const urlParams = queryString.parseUrl(window.location.href)
-        const searchValue = urlParams.query?.search;
-        return searchValue
+        const searchValue = urlParams.query.search;
+        console.log(searchValue);
+        console.log(urlParams.query);
+
+        const queryStr = window.location.search;
+        const parameters = new URLSearchParams(queryStr);
+        const value = parameters.get('key');
+        console.log(value);
+        console.log(parameters)
+        return searchValue;
     }
 
     render() {

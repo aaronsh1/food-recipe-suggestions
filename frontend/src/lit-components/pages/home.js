@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import queryString from 'query-string';
 
 import { HomeStyles } from '../../styles';
 
@@ -6,41 +7,36 @@ export class Home extends LitElement {
   static styles = HomeStyles;
 
   static properties = {
-
+    searchValues: [],
+    chips: html
   }
 
   constructor() {
     super();
+
+    this.searchValues = [];
+    this.chips = html``;
   }
 
-  chipIngredientsR1 = ["egg", "pasta", "carrot"];
-  chipIngredientsR2 = ["tomato", "bacon", "chicken", "beef", "strawberries"];
+  addChips = (e) => {
+    if(e.key === "Enter"){
+      const searchValue = this.shadowRoot.getElementById('searchBar').value;
+      console.log(searchValue);
+      this.shadowRoot.getElementById('searchBar').value = null;
+      this.searchValues.push(searchValue);
+      console.log(this.searchValues);
+      this.chips = html`
+                ${this.chips}
+                <input type="button" value=${searchValue}>
+              `;
 
-  addChips = () => {
-    let chips = html`<input id="first-ingredient" type="button" value="milk" @click="${() => {this.searchRecipes("milk")}}">`;
-    this.chipIngredientsR1.forEach((ingredient) => {
-      chips = html`
-                ${chips}
-                <input type="button" value=${ingredient} @click="${() => {this.searchRecipes(ingredient)}}">
-              `;
-    });
-    chips = html`
-              ${chips}
-              <br>
-            `;
-    this.chipIngredientsR2.forEach((ingredient) => {
-      chips = html`
-                ${chips}
-                <input type="button" value=${ingredient} @click="${() => {this.searchRecipes(ingredient)}}">
-              `;
-    });
-    return chips;
+
+    }
   };
 
-  searchRecipes = (stringToSearch) => {
-    console.log(stringToSearch);
-
-    window.location.href = `/searchTemp?search=${stringToSearch}`;
+  searchRecipes = () => {
+    const stringToSearch = queryString.stringify({search: this.searchValues}, {arrayFormat: 'bracket'});
+    window.location.href = `/searchTemp?${stringToSearch}`;
   }
 
   render() {
@@ -50,13 +46,11 @@ export class Home extends LitElement {
           <h1><img class="light-blue-logo" src="/public/images/light-blue-logo.svg" alt="logo">CookBook</h1>
           <p id="question">Having trouble coming up with different meals everyday?</p>
           <p id="view">View hundreds of recipes filtered by the ingredients in YOUR pantry!</p>
-          <form>
-            ${this.addChips()}
-          </form>
-          <form class="search-form" >
-            <input type="search" placeholder="Search ingredients and recipes..."/>
-            <button class="search-button"><img class="search-drumstick" src="/public/images/search-drumstick.svg" alt="search"></button>
-          </form>
+          <section id="chips-section">${this.chips}</section>
+          <section class="search-form" >
+            <input id="searchBar" type="search" placeholder="Search ingredients and recipes..." @keypress="${this.addChips}"/>
+            <button class="search-button" @click="${this.searchRecipes}"><img class="search-drumstick" src="/public/images/search-drumstick.svg" alt="search"></button>
+          </section>
         </section>
         <section class="random-images">
           <img class="knife-fork" src="/public/images/knife-fork.svg" alt="knife-fork">
