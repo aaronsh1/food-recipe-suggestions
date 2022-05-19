@@ -13,7 +13,7 @@ export class AppRoot extends LitElement {
 
   //TODO: Global components (such as nav, etc.)
   render() {
-    let route = window.location.href
+      let route = window.location.href
       .replace(/http(s)?:\/\/.+?\//, '') //Remove hostname
       .replace(/\?.+/, '') //Remove query params
 
@@ -22,14 +22,19 @@ export class AppRoot extends LitElement {
     }
 
     let page;
+    
 
     switch (route) {
       case 'home': 
         page = html`<home-page></home-page>`; 
         break;
 
-        case 'profile': 
-        page = html`<profile-page class='profile'></profile-page>>`; 
+      case 'profile': 
+        page = html`<profile-page class='profile'></profile-page>`; 
+        break;
+
+      case 'searchTemp':
+        page = html`<search-temp></search-temp>`;
         break;
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed

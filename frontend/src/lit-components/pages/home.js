@@ -17,11 +17,11 @@ export class Home extends LitElement {
   chipIngredientsR2 = ["tomato", "bacon", "chicken", "beef", "strawberries"];
 
   addChips = () => {
-    let chips = html`<input id="first-ingredient" type="button" value="milk" @click="${() => {this.searchChip("milk")}}">`;
+    let chips = html`<input id="first-ingredient" type="button" value="milk" @click="${() => {this.searchRecipes("milk")}}">`;
     this.chipIngredientsR1.forEach((ingredient) => {
       chips = html`
                 ${chips}
-                <input type="button" value=${ingredient} @click="${() => {this.searchChip(ingredient)}}">
+                <input type="button" value=${ingredient} @click="${() => {this.searchRecipes(ingredient)}}">
               `;
     });
     chips = html`
@@ -31,14 +31,16 @@ export class Home extends LitElement {
     this.chipIngredientsR2.forEach((ingredient) => {
       chips = html`
                 ${chips}
-                <input type="button" value=${ingredient} @click="${() => {this.searchChip(ingredient)}}">
+                <input type="button" value=${ingredient} @click="${() => {this.searchRecipes(ingredient)}}">
               `;
     });
     return chips;
   };
 
-  searchChip = (ingredient) => {
-    console.log(ingredient);
+  searchRecipes = (stringToSearch) => {
+    console.log(stringToSearch);
+
+    window.location.href = `/searchTemp?search=${stringToSearch}`;
   }
 
   render() {
@@ -51,7 +53,7 @@ export class Home extends LitElement {
           <form>
             ${this.addChips()}
           </form>
-          <form class="search-form">
+          <form class="search-form" >
             <input type="search" placeholder="Search ingredients and recipes..."/>
             <button class="search-button"><img class="search-drumstick" src="/public/images/search-drumstick.svg" alt="search"></button>
           </form>
