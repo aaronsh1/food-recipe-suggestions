@@ -1,7 +1,7 @@
 const express = require("express");
 const recipeRouter = express();
 const authMiddleware = require("../authMiddleware");
-const { ModelNames, findAll, create, findByPk } = require("../database/datasource");
+const { ModelNames, findAll, create, findByPk, bulkCreate } = require("../database/datasource");
 const { Op } = require("sequelize");
 
 //req body:
@@ -67,11 +67,21 @@ recipeRouter.get('/recipe', async (req, res) => {
 
 recipeRouter.post('/recipe', authMiddleware, async (req, res) => {
   try {
-    const data = req.body;
-    const record = await create(ModelNames.Recipe, data);
-    res.send(record);
+    const { IngredientIds, ...data } = req.body;
+    const record = (await create(ModelNames.Recipe, data)).dataValues;
+
+    const recipeIngredients = (await bulkCreate(ModelNames.RecipeIngredients, IngredientIds.map(id => ({
+      IngredientId: id,
+      RecipeId: record.RecipeId,
+    })))).map(item => item.dataValues);
+
+    res.send({
+      ...record,
+      RecipeIngredients: recipeIngredients,
+    });
 
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 });
