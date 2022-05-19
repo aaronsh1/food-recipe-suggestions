@@ -13,6 +13,11 @@ export class NavBar extends LitElement {
         super();
     }
 
+    handleLogout() {
+        window.localStorage.removeItem('token');
+        window.location.href = "/login"
+    }
+
     render() {
         return html`
         <header>
@@ -29,7 +34,9 @@ export class NavBar extends LitElement {
                 </ul>
             </nav>
 
-            ${(!window.localStorage.getItem("token"))? html`<a href="/register" id="signup"><button>Sign-up</button></a><a href="/login"><button>Login</button></a>` : ""}
+            ${(!window.localStorage.getItem("token"))? 
+                html`<a href="/register" id="signup"><button>Sign-up</button></a><a href="/login"><button>Login</button></a>` : 
+                html`<button @click="${() => this.handleLogout()}">Logout</button>`}
             
             <a href="/home"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
         </header>
