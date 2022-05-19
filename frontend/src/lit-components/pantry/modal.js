@@ -1,4 +1,5 @@
 import {html, LitElement} from 'lit'
+import { fetchApi } from '../../api/fetchApi';
 import { ModalStyles } from '../../styles/modal';
 
 export class AddIngredientModal extends LitElement {
@@ -12,17 +13,18 @@ export class AddIngredientModal extends LitElement {
     constructor() {
         super();
         this.title = "Add Ingredient";
-        this.ingredinetList = () => {
-            fetch(apiUrl+"/pantry", new URLSearchParams({
-                UserId: 1
-            }))
-            .then(resposne.json())
-            .then(data => this.ingredientList.push(data))
-            .catch(err, () => {
-                console.log(err);
-            })
-        };
-        this.ingredientList = ["cookie", "banana", "apple"];
+        fetchApi({
+            endpoint: 'ingredient/all',
+            method: "GET"
+        })
+        .then(res => {
+            if(res.status == 200) {
+                this.ingredientList = res.data;
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        });
     }
 
     render() {
@@ -41,7 +43,7 @@ export class AddIngredientModal extends LitElement {
                     <label class="add-modal-form-element" name="ingredient">Choose Category</label>
                     <select class="add-modal-form-element" id="modal-dropdown" name="ingredient">
                     ${this.ingredientList.map(
-                        item =>  html`<option class="ingredient-option" value=${item}>${item}</option>`
+                        item =>  html`<option class="ingredient-option" value=${item.id}>${item.name}</option>`
                     )}
                     </select>
                     <input class="add-modal-form-element" id="add-ingredient-submit" type="submit" value="Done" />
