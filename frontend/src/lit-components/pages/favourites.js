@@ -29,12 +29,12 @@ export class Favourites extends LitElement {
     })
     .catch();
 
-    this.recipes = [{
-      RecipeId: 1,
-      Description: "some description",
-      Image: null,
-      Author: null,
-    }];
+    // this.recipes = [{
+    //   RecipeId: 1,
+    //   Description: "some description",
+    //   Image: null,
+    //   Author: null,
+    // }];
     //this.recipes = [{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'},{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'}];
   }
 

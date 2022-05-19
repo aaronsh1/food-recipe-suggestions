@@ -27,9 +27,7 @@ export class NavSidebar extends LitElement {
             <nav class="navbar">
                 <ul class="navMenu">
                     <li><a href="/home" class="navItem sidebar">Home</a></li>
-                    <li><a href="/search" class="navItem sidebar">Search</a></li>
                     <li><a href="/favourites" class="navItem sidebar">Favourites</a></li>
-                    <li><a href="/profile" class="navItem sidebar">Profile</a></li>
                     <li><a href="/recipes/" class="navItem sidebar">Recipes</a></li>
                     ${(!window.localStorage.getItem("token"))? 
                         html`<li><a href="/register" id="signup" class="navItem sidebar"><button>Sign-up</button></a></li>

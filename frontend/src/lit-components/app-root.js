@@ -30,7 +30,7 @@ export class AppRoot extends LitElement {
         break;
 
       case 'profile':
-        page = html`<profile-page class='profile'></profile-page>>`;
+        page = html`<profile-page class='profile'></profile-page>`;
         break;
 
       case 'recipes': 

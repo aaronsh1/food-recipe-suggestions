@@ -29,17 +29,17 @@ export class Profile extends LitElement {
 
 
 
-    this.user = undefined; 
+    this.user = {}; 
 
-    this.user = {    
-      UserId: 1,
-      Username: this.testString,
-      Password: 'something',
-      Salt: 'salt',
-      Email: 'something@gmail.com',
-    };
+    // this.user = {    
+    //   UserId: 1,
+    //   Username: this.testString,
+    //   Password: 'something',
+    //   Salt: 'salt',
+    //   Email: 'something@gmail.com',
+    // };
 
-    this.formUsername = this.user.Username;
+    //this.formUsername = this.user.Username;
 
     fetchApi({
       endpoint: 'profile',
@@ -48,6 +48,7 @@ export class Profile extends LitElement {
     })
     .then(res => {
       if (res.status === 200) {
+
         this.user = res.data;
       }
     })
@@ -75,9 +76,9 @@ export class Profile extends LitElement {
      
         <fieldset class='${!this.showPasswordChangeInputs ? '' : 'hide'}'> 
             <label>Username</label><br>
-            <input id='username' class='input-style' type='text' value="${this.user.Username}"><br><br>
+            <input id='username' class='input-style' type='text' value="${this.user?.Username}" readonly><br><br>
             <label>Email</label><br>
-            <input id='email' class='input-style' type='email' value="${this.user.Email}"><br><br>
+            <input id='email' class='input-style' type='email' value="${this.user?.Email}" readonly><br><br>
      
             </fieldset>
 
@@ -87,7 +88,7 @@ export class Profile extends LitElement {
 
             <fieldset class='${this.showPasswordChangeInputs ? '' : 'hide'}'>                    
                 <label>Current Password</label><br>
-                <input id='currentPass' class='input-style' type='password'><br><br>
+                <input id='currentPass' readclass='input-style' type='password' ><br><br>
 
                 <label >New Password</label><br>
                 <input id='newPass' class='input-style' type='password'><br><br>
@@ -138,22 +139,25 @@ _apply(e) {
     var formNewPass = this.shadowRoot.getElementById("newPass").value;
     var formConfirmPass= this.shadowRoot.getElementById("confirmPass").value;
 
-    fetchApi({
-      endpoint: 'login',
-      data: {
-        username: this.user.Username,
-        password: formCurrentPass ,
-      },
-      method: 'POST',
-    })
-    .then(res => {
 
-      if (res.status === 200) {
-        if (formNewPass === formConfirmPass){
-          //change password
-        }
-      }
-    });
+    if (formNewPass === formConfirmPass)
+    {
+      fetchApi({
+        endpoint: 'profile',
+        data: {
+          newPassword: formNewPass,
+           currentPassword: formCurrentPass,
+        },
+        token: window.localStorage.getItem("token"),
+        method: 'PUT',
+      })
+      .then(res => {
+        alert('Password changed');
+      });
+
+    }
+
+
   }
   else
   {

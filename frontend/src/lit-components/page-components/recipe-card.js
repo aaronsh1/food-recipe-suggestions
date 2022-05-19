@@ -27,7 +27,7 @@ export class RecipeCard extends LitElement {
         <article @click="${() => window.location.href = "/recipe?id=" + this.recipeId}">
 
           <aside>
-            <img src="${(!this.image)? 'public/images/lily-banse--YHSwy6uqvk-unsplash.jpg' : this.image}" height="250px" width="375px"/>
+            <img src="${(!this.image)? '/public/images/lily-banse--YHSwy6uqvk-unsplash.jpg' : this.image}" height="250px" width="375px"/>
           </aside>
 
           <section>

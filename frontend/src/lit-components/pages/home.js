@@ -61,7 +61,7 @@ export class Home extends LitElement {
           <p id="view">View hundreds of recipes filtered by the ingredients in YOUR pantry!</p>
           <section id="chips-section">${this.chips}</section>
           <section class="search-form" >
-            <input id="searchBar" type="search" placeholder="Search ingredients and recipes..." @keypress="${this.addChips}"/>
+            <input id="searchBar" type="search" placeholder="Search ingredients..." @keypress="${this.addChips}"/>
             <button class="search-button" @click="${this.searchRecipes}"><img class="search-drumstick" src="/public/images/search-drumstick.svg" alt="search"></button>
           </section>
         </section>

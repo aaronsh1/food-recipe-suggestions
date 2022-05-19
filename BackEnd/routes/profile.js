@@ -1,27 +1,23 @@
 const express = require("express");
 const profileRouter = express.Router();
-const { ModelNames, findAll, create } = require("../database/datasource");
+const { ModelNames, findByPk, update} = require("../database/datasource");
 const { Op, Model } = require("sequelize");
+const crypto = require('crypto');
+
 
 const authMiddleware = require('../authMiddleware');
 
-profileRouter.use(authMiddleware);
-
-profileRouter.get("/profile", async (req, res) => {
+profileRouter.get("/profile",authMiddleware , async (req, res) => {
 
     try {
-    let userId = req.UserId;
+    const id = req.UserId;
 
-    let user = (await findAll(ModelNames.User, {
-        where: {
-            UserId: userId
-        }
-    })).map(item => item.dataValues);
-
+    const user = await findByPk(ModelNames.User, id);
 
     res.send(user);
     }
 catch(err) {
+    console.log(err);
     res.status(500).send(err);
 }
 });
@@ -38,27 +34,36 @@ profileRouter.post("/profile/", (req, res) => {
 }
 })
 
-profileRouter.put("/profile", (req, res) => {
+profileRouter.put("/profile", authMiddleware, async (req, res) => {
 
     try {
-    let userId = req.query.id;
-    let ingredientsToAdd = [...req.query.ingredients];
+    let userId = req.UserId;
 
-    // add ingredients to db
+    const user = await findByPk(ModelNames.User, userId);
+    const {newPassword, currentPassword} = req.body;
+
+    const hashPassword = crypto.createHash('sha256').update(currentPassword + user.Salt).digest("hex");
+
+    if (hashPassword !== user.Password)
+    {
+        res.status(401).send("Incorrect Password");
+        return;
+    }
+
+
+    const salt = crypto.createHash('sha256').update(String(Math.random())).digest('hex');
+    const passwordHash = crypto.createHash('sha256').update(newPassword + salt).digest("hex");
+
+
+    const data = await update(ModelNames.User,{Salt: salt, Password: passwordHash},{
+        where: {
+            UserId:  userId
+        }
+    });
+    
     res.send("ok");
 }catch(err) {
-    res.status(500).send(err);
-}
-})
-
-profileRouter.delete("/profile", (req, res) => {
-    try {
-    let userId = req.query.id;
-    let ingredientsToDelete = [...req.query.ingredients];
-
-    // delete relevant ingredients from db
-    res.send("ok");
-}catch(err) {
+    console.log(err);
     res.status(500).send(err);
 }
 })

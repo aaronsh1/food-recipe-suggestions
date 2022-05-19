@@ -12,7 +12,10 @@ const authRouter = require('./routes/auth');
 const pantryRouter = require('./routes/pantry');
 const recipeRouter = require('./routes/recipes');
 const ingredientRouter = require('./routes/ingredients');
+const profileRouter = require('./routes/profile');
+const favouritesRouter = require('./routes/favourites');
 const publicRouter = require('./routes/public');
+
 
 dotenv.config();
 
@@ -28,7 +31,10 @@ app.use('/api', authRouter);
 app.use('/api', pantryRouter);
 app.use('/api', recipeRouter);
 app.use('/api', ingredientRouter);
+app.use('/api', profileRouter);
+app.use('/api', favouritesRouter);
 app.use('/', publicRouter); //Must always be bottom-most router
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

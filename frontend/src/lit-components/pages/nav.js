@@ -61,7 +61,6 @@ export class NavBar extends LitElement {
             <nav class="navbar">
                 <ul class="navMenu">
                     <li><a href="/home" class="navItem hide">Home</a></li>
-                    <li><a href="/search" class="navItem hide">Search</a></li>
                     <li><a href="/favourites" class="navItem hide">Favourites</a></li>
                     <li><a href="/recipes/" class="navItem hide">Recipes</a></li>
                     <li><a href="/pantry/" class="navItem hide">My Pantry</a></li>
