@@ -26,7 +26,12 @@ export const fetchApi = async ({
     body: (method !== HttpMethods.Get && JSON.stringify(data)) || undefined,
   });
 
-  const json = await response.json();
+  let json
+  try{
+    json = await response.json()
+  }catch(err){
+    json = "ok";
+  };
   return {
     data: json,
     status: response.status,
