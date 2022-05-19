@@ -34,10 +34,12 @@ export class AppRoot extends LitElement {
         case 'profile': 
         page = html`<profile-page class='profile'></profile-page>>`; 
         break;
-
         case 'recipes': 
         page = html`<recipes-page></recipes-page>`; 
         break;
+        case 'pantry': return html`
+          <pantry-a></pantry-a>
+        `;
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
