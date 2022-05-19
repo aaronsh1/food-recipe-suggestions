@@ -1,5 +1,7 @@
 import { html, LitElement } from 'lit';
 
+import { fetchApi } from '../../api/fetchApi';
+
 import {ProfileStyles } from '../../styles';
 export class Profile extends LitElement {
   static styles = ProfileStyles;
@@ -8,16 +10,39 @@ export class Profile extends LitElement {
   static get properties() {
     return {
       showPasswordChangeInputs: {type:Boolean},
-      collapseBanner: {type:Boolean}
+      collapseBanner: {type:Boolean},
+      profile: {},
+      user: {},
+      testString: {},
+      Username: {},
     };
   }
 
 
   constructor() {
     super();
-    this.showPasswordChangeInputs = false
-    this.collapseBanner = false;
+    this.testString = 'username';
+
+
+
+    this.user = undefined; 
+
+    // fetchApi({
+    //   endpoint: 'profile',
+    //   method: 'GET',
+    //   token: window.localStorage.getItem('token'),
+    // })
+    // .then(res => {
+    //   if (res.status === 200) {
+    //     this.profile = res.data;
+    //   }
+    // })
+    // .catch();
+    // this.showPasswordChangeInputs = false
+    // this.collapseBanner = false;
   }
+
+
 
 
 
@@ -30,13 +55,21 @@ export class Profile extends LitElement {
 
     <section class='profile-container'>
     
+    <button @click="${this._testButton}">click</button>
+
         <form class='form-style'>
                 
+         
+            ${this.user ? html` 
+            
             <label>Username</label><br>
-            <input class='input-style' type='text'><br><br>
-
+            <input class='input-style' type='text' .value="${this.user.Username}"><br><br>
             <label>Email</label><br>
             <input class='input-style' type='email'><br><br>
+            
+            ` : ''}
+
+
 
             <button class='text-button' class='${!this.showPasswordChangeInputs ? 'text-button' : 'hide'}' @click="${this._changePasswordClick}" type='button'>Change password?</button><br>
 
@@ -68,6 +101,20 @@ export class Profile extends LitElement {
     this.showPasswordChangeInputs = true;
     this.collapseBanner = true;
 }
+
+_testButton(e) {
+
+  this.user = {    
+    UserId: 1,
+    Username: this.testString,
+    Password: 'something',
+    Salt: 'salt',
+    Email: 'something@gmail.com',
+  };
+  this.testString = this.testString + this.testString;
+  //this.user.Username = this.user.Username + "extra";
+  console.log(this.user.Username);
+ }
 
 _discard(e) {
     this.showPasswordChangeInputs = false;
