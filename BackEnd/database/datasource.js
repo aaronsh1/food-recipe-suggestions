@@ -24,6 +24,9 @@ const initialize = async () => {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
+    pool: {
+      max: 1,
+    }
   });
 
   await sequelize.authenticate();

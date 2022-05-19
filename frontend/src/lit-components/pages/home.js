@@ -33,22 +33,22 @@ export class Home extends LitElement {
             <input type="button" value="Ingredient"/>
           </form>
           <form class="search-form">
-            <input type="search" placeholder="Search ingredients and recipes..."/>
+            <input class="search-bar" type="search" placeholder="Search ingredients and recipes..."/>
             <button class="search-button"><img class="search-drumstick" src="/public/images/search-drumstick.svg" alt="search"></button>
           </form>
         </section>
         <section class="random-images">
-          <img class="knife-fork" src="/public/images/knife-fork.svg" alt="knife-fork">
-          <img class="burger" src="/public/images/burger.svg" alt="burger">
-          <img class="pizza" src="/public/images/pizza.svg" alt="pizza">
-          <img class="cake" src="/public/images/cake.svg" alt="cake">
-          <img class="food-bowl" src="/public/images/food-bowl.svg" alt="food-bowl">
-          <img class="carrot" src="/public/images/carrot.svg" alt="carrot">
-          <img class="egg" src="/public/images/egg.svg" alt="egg">
-          <img class="wine-glasses" src="/public/images/wine-glasses.svg" alt="wine-glasses">
-          <img class="bread" src="/public/images/bread.svg" alt="bread">
+          <img class="food-pics knife-fork" src="/public/images/knife-fork.svg" alt="knife-fork">
+          <img class="food-pics burger" src="/public/images/burger.svg" alt="burger">
+          <img class="food-pics pizza" src="/public/images/pizza.svg" alt="pizza">
+          <img class="food-pics cake" src="/public/images/cake.svg" alt="cake">
+          <img class="food-pics food-bowl" src="/public/images/food-bowl.svg" alt="food-bowl">
+          <img class="food-pics carrot" src="/public/images/carrot.svg" alt="carrot">
+          <img class="food-pics egg" src="/public/images/egg.svg" alt="egg">
+          <img class="food-pics wine-glasses" src="/public/images/wine-glasses.svg" alt="wine-glasses">
+          <img class="food-pics bread" src="/public/images/bread.svg" alt="bread">
         </section>
-        <footer>
+        <footer class="home-footer">
           <section>
             <h1><img class="dark-blue-logo" src="/public/images/dark-blue-logo.svg" alt="logo">CookBook</h1>
             <p class="bbd">BBD Graduate Program - Web development fundamentals</p>

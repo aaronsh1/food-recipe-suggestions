@@ -5,6 +5,9 @@ export * from './recipe-card';
 export * from './app-root';
 export * from './profile';
 export * from './nav';
+export * from './register';
+export * from './deleteModal';
 export * from './recipes';
 export * from './register';
-export * from './recipe-view'
+export * from './recipe-view
+export * from './navSidebar';
