@@ -183,7 +183,7 @@ changeEmail(email) {
       Username: this.user.UserId,
       Email: email ,
     },
-    method: 'POST',
+    method: 'PUT',
   })
   .then(res => {
 

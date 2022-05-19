@@ -28,25 +28,30 @@ export class Favourites extends LitElement {
       }
     })
     .catch();
+
+    this.recipes = [{
+      RecipeId: 1,
+      Description: "some description",
+      Image: null,
+      Author: null,
+    }];
     //this.recipes = [{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'},{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'}];
   }
 
   render() {
     return html`
-      <section class='favourites-container'>
+      <main>
         <header><h1>Your Favourite Recipes</h1></header>
 
-        <ul class='recipes-container'>
-        ${this.recipes.map((i,index) => html`
+        ${(this.recipes.length == 0)? html`<p>No Results :(</p>` : ''}
+        ${this.recipes.map((i) => html`
         
-        <recipe-card recipeId='${i.RecipeId}' name='${i.RecipeName}' .description='${i.Description}' image='${i.Image}' author='${i.Author}' @click='${this._recipeClicked}'></recipe-card>
+        <recipe-card class="recipeCard"  recipeId='${i.RecipeId}' name='${i.RecipeName}' .description='${i.Description}' image='${i.Image}' author='${i.Author}' @click='${this._recipeClicked}'></recipe-card>
         
         
         `)}
 
-        </ul>
-
-      </section>
+  </main>
     `;
   }
 
