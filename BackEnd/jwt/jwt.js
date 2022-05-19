@@ -5,7 +5,6 @@ var privateKEY  = fs.readFileSync(__dirname + '/keys/private.key', 'utf8');
 var publicKEY  = fs.readFileSync(__dirname + '/keys/public.key', 'utf8');
 module.exports = {
  sign: (payload, $Options) => {
-   console.log('Started signing');
 
   // Token signing options
   var signOptions = {
