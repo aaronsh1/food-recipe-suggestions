@@ -12,7 +12,6 @@ export const HomeStyles = css`
 
   main {
     position: relative;
-    background: rgba(233, 196, 106, 0.22);
   }
 
   .main-components {
