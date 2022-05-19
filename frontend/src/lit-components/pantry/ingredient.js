@@ -5,7 +5,7 @@ export class PantryIngredient extends LitElement {
     static styles = IngredientStyles;
 
     static properties = {
-        id: null,
+        id: 0,
         name: "",
         image: ""
     }
@@ -17,23 +17,25 @@ export class PantryIngredient extends LitElement {
         this.image = image;
     }
 
-    deleteIngredient = (ingredientId) => {
-        fetch(apiUrl, {
-            method: "DELETE",
-            body: ingredientId
-        })
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+    deleteIngredient = () => {
+        // fetch(apiUrl, {
+        //     method: "DELETE",
+        //     body: ingredientId
+        // })
+        // .then((res) => {
+        //     console.log(res);
+        // })
+        // .catch((err) => {
+        //     console.log(err);
+        // })
+
+        console.log(`delete ingredient: ${this.id}`);
     }
 
     render() {
         return html `
         <article class="ingredient-block">
-            <button alt="delete icon" class="delete-ingredient"><img src="/public/images/ingredients/delete.png" @click=${this.deleteIngredient(this.id)}/></button>
+            <button alt="delete icon" class="delete-ingredient"><img src="/public/images/ingredients/delete.png" @click=${this.deleteIngredient}/></button>
             <img src=${this.image} alt="ingredient-pic"  class="ingredient-pic"/>
             <footer class="ingredient-name">${this.name}</footer>
         </article>
