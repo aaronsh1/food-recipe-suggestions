@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import { fetchApi } from '../../api/fetchApi';
 
 import { FavouritesStyles } from '../../styles';
 
@@ -14,9 +15,20 @@ export class Favourites extends LitElement {
 //Name, Description, Image, author
   constructor() {
     super();
-    this.recipes = [{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'},{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'}]
+    console.log('constructor');
 
-    Object.keys.f
+    fetchApi({
+      endpoint: 'favourites',
+      method: 'GET',
+      token: window.localStorage.getItem('token'),
+    })
+    .then(res => {
+      if (res.status === 200) {
+        this.recipes = res.data;
+      }
+    })
+    .catch();
+    //this.recipes = [{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'},{name: 'Chicken Parmesan Pasta', description: 'The salty goodness of crisped pork belly transfers over to the leaner white meat.'},{name: 'Something food', description: 'tastty stuff i think.'}];
   }
 
   render() {
@@ -27,7 +39,7 @@ export class Favourites extends LitElement {
         <ul class='recipes-container'>
         ${this.recipes.map((i,index) => html`
         
-        <recipe-card id='${index}' .name='${i.name}' .description='${i.description}' @click='${this._recipeClicked}'></recipe-card>
+        <recipe-card id='${index}' .name='${i.RecipeName}' .description='${i.Description}' @click='${this._recipeClicked}'></recipe-card>
         
         
         `)}

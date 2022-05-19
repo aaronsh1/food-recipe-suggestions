@@ -23,7 +23,7 @@ export const fetchApi = async ({
       'Content-Type': 'application/json',
       Authorization: token,
     },
-    body: JSON.stringify(data),
+    body: (method !== HttpMethods.Get && JSON.stringify(data)) || undefined,
   });
 
   const json = await response.json();
