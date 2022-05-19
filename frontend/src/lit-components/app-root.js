@@ -14,7 +14,7 @@ export class AppRoot extends LitElement {
 
   //TODO: Global components (such as nav, etc.)
   render() {
-    let route = window.location.href
+      let route = window.location.href
       .replace(/http(s)?:\/\/.+?\//, '') //Remove hostname
       .replace(/\?.+/, '') //Remove query params
 
@@ -23,6 +23,7 @@ export class AppRoot extends LitElement {
     }
 
     let page;
+    
 
     switch (route) {
       case 'home':
@@ -51,6 +52,10 @@ export class AppRoot extends LitElement {
 
       case 'pantry':
         page = html`<pantry-a></pantry-a>`;
+        break;
+
+      case 'profile': 
+        page = html`<profile-page class='profile'></profile-page>`; 
         break;
 
       case 'register':
