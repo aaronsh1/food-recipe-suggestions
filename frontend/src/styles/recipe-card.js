@@ -2,29 +2,26 @@ import { css } from 'lit';
 
 export const RecipeCardStyles = css`
 
-
-
-  .recipe-image {
-    width: 300px;
-    height: 300px;
-    border-radius: 5px;
-  }
-
-  .recipe-container {
-    padding: 20px;
+  article {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
     margin: 20px;
-    border-radius: 10px;
-    background-color: #F4A261;
-    width: 300px;
-    
+    margin-bottom: 0px;
+    border-radius: 5px;
+    border-color: #E9C46A;
+    border-width: 1px;
+    border-style: solid;
+    background-color: white;
   }
 
-  .recipe-container h4 {
-    margin: 10px 0px;
+  aside {
+    margin-right: 30px;
   }
 
-  .recipe-container p {
-    font-size: smaller;
+  section p {
+    height: 150px;
+    overflow-y: auto;
   }
 
   .visible {

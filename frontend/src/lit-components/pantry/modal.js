@@ -12,9 +12,16 @@ export class AddIngredientModal extends LitElement {
     constructor() {
         super();
         this.title = "Add Ingredient";
-        // this.ingredinetList = () => {
-        //     // query on db to return ingredients
-        // };
+        this.ingredinetList = () => {
+            fetch(apiUrl+"/pantry", new URLSearchParams({
+                UserId: 1
+            }))
+            .then(resposne.json())
+            .then(data => this.ingredientList.push(data))
+            .catch(err, () => {
+                console.log(err);
+            })
+        };
         this.ingredientList = ["cookie", "banana", "apple"];
     }
 
@@ -37,7 +44,7 @@ export class AddIngredientModal extends LitElement {
                         item =>  html`<option class="ingredient-option" value=${item}>${item}</option>`
                     )}
                     </select>
-                    <input class="add-modal-form-element" id="add-ingredient-submit" type="submit" value="Done"></input>
+                    <input class="add-modal-form-element" id="add-ingredient-submit" type="submit" value="Done" />
                 </form>
             </section>
         `
