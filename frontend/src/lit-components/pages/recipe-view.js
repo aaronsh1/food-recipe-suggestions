@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { RecipeViewStyles } from '../../styles';
+import { fetchApi } from '../../api/fetchApi';
 
 export class RecipeView extends LitElement {
   static styles = RecipeViewStyles;
@@ -10,6 +11,7 @@ export class RecipeView extends LitElement {
 
   constructor() {
     super();
+    this.recipe = null;
 
     try {
       let queryParamString = window.location.href.replace(/http(s)?:\/\/.+\?/, '') //Remove full route
@@ -37,17 +39,28 @@ export class RecipeView extends LitElement {
     return input.split('\n');
   }
 
-  getRecipe(recipeId) {
+  async getRecipe(recipeId) {
     console.log("RecipeId: " + recipeId);
 
-    return {
-      RecipeId: 0,
-      RecipeName: "Beefy Supreme (Burger)",
-      Description: "This is a very long and detailed description of how to make the above mentioned delicious food item.",
-      Method: this.split("This is a very long method description of how to combine this very specific combination of ingredients into a tasty food item.\n This is the second line of this very long method!!!\nThis is the 3rd line."),
-      Image: "public/images/lily-banse--YHSwy6uqvk-unsplash.jpg",
-      Author: "Johann Schepers",
-      Ingredients: ["Tomato", "Lettuce", "Beef Patty", "Burger Bun"]
+    try {
+      let res = await fetchApi({
+        endpoint: `recipe/?id=${recipeId}`,
+        method: 'GET',
+      });
+
+      if (res.status != 200) {
+        alert("Server returned error code: " + res.status);
+        return;
+      }
+
+      this.recipe = res.data;
+
+      this.recipe.Method = this.split(this.recipe.Method);
+
+      console.log(JSON.stringify(this.recipe));
+
+    } catch (error){
+      alert("Something bad went wrong: " + JSON.stringify(error));
     }
   }
 
@@ -59,10 +72,7 @@ export class RecipeView extends LitElement {
             <h1>Recipe: ${this.recipe.RecipeName}</h1>
             <address>by ${(!this.recipe.Author)? "Anon": this.recipe.Author}</address>
             <p>${this.recipe.Description}</p>
-
-            ${this.recipe.Ingredients.map(ingredient => {
-              return html`<input type="button" value="${ingredient}"/>`
-            })}
+            
           </header>
 
           <aside>
@@ -73,7 +83,7 @@ export class RecipeView extends LitElement {
         <section>
           <h1>Method:</h1>
 
-          ${this.recipe.Method.map(line => {
+          ${(!this.recipe.Method)? "" : this.recipe.Method.map(line => {
             return html`<p>${line}</p>`;
           })}
         </section>
