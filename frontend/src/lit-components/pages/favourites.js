@@ -33,10 +33,9 @@ export class Favourites extends LitElement {
 
   render() {
     return html`
-      <section class='favourites-container'>
+      <main>
         <header><h1>Your Favourite Recipes</h1></header>
 
-        <ul class='recipes-container'>
         ${this.recipes.map((i,index) => html`
         
         <recipe-card id='${index}' .name='${i.RecipeName}' .description='${i.Description}' @click='${this._recipeClicked}'></recipe-card>
@@ -44,9 +43,7 @@ export class Favourites extends LitElement {
         
         `)}
 
-        </ul>
-
-      </section>
+      </main>
     `;
   }
 
