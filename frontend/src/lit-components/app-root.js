@@ -1,5 +1,6 @@
-import { html, LitElement, css } from 'lit';
+import { html, LitElement } from 'lit';
 import {AppRootStyles} from '../styles';
+
 export class AppRoot extends LitElement {
   static styles = AppRootStyles
 
@@ -25,24 +26,50 @@ export class AppRoot extends LitElement {
     
 
     switch (route) {
-      case 'home': 
-        page = html`<home-page></home-page>`; 
+      case 'home':
+        page = html`<home-page></home-page>`;
+        break;
+
+      case 'profile':
+        page = html`<profile-page class='profile'></profile-page>>`;
+        break;
+
+      case 'recipes': 
+        page = html`<recipes-page></recipes-page>`; 
+        break;
+
+      case 'recipe': 
+        page = html`<recipe-view-page></recipe-view-page>`; 
+        break;
+
+      case 'login':
+        page = html`<sign-in></sign-in>`;
+        break;
+
+      case 'favourites':
+        page = html`<favourites-page></favourites-page>`;
+        break;
+
+      case 'pantry':
+        page = html`<pantry-a></pantry-a>`;
         break;
 
       case 'profile': 
         page = html`<profile-page class='profile'></profile-page>`; 
         break;
 
-      case 'searchTemp':
-        page = html`<search-temp></search-temp>`;
+      case 'register':
+        page = html`<register-page></register-page>`;
         break;
 
       default: window.location.href = '/home'; //Navigate to home when unknown route is passed
     }
 
     return html`
-      <nav-bar></nav-bar>
-      ${page}
+      <section class="app-root">
+        <nav-bar></nav-bar>
+        ${page}
+      </section>
     `;
   }
 }

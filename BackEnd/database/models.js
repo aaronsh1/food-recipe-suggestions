@@ -38,6 +38,24 @@ const Models = {
     },
   },
 
+  Ingredient: {
+    IngredientId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    IngredientName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Category: {
+      type: DataTypes.INTEGER,
+    },
+    Image: {
+      type: DataTypes.STRING,
+    },
+  },
+
   Pantry: {
     UserId: {
       type: DataTypes.INTEGER,
@@ -57,21 +75,37 @@ const Models = {
     },
   },
 
-  Ingredient: {
-    IngredientId: {
+  Recipe: {
+    RecipeId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
-    },
-    IngredientName: {
-      type: DataTypes.STRING,
       allowNull: false,
+      autoIncrement: true
     },
-    Category: {
-      type: DataTypes.INTEGER,
+
+    RecipeName: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
+
+    Description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    Method: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
     Image: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+
+    Author: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
   },
 
@@ -120,40 +154,6 @@ const Models = {
     Timestamp: {
       type: DataTypes.DATE,
       allowNull: false
-    },
-  },
-
-  Recipe: {
-    RecipeId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-      autoIncrement: true
-    },
-
-    RecipeName: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-
-    Description: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-
-    Method: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-
-    Image: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-
-    Author: {
-      type: DataTypes.STRING,
-      allowNull: true
     },
   },
 }

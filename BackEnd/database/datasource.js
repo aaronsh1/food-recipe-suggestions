@@ -24,6 +24,9 @@ const initialize = async () => {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
+    pool: {
+      max: 1,
+    },
   });
 
   await sequelize.authenticate();
@@ -35,12 +38,9 @@ const getSequelizeInstance = async () => {
 
 const sync = async () => {
   const defs = Object.values(getModelDefinitions());
-
-  return await Promise.all(defs.map(model => {
-    return new Promise(async () => {
-      await model.sync();
-    });
-  }));
+  defs.forEach(async model => {
+    await model.sync();
+  });
 };
 
 const close = async () => {
@@ -72,6 +72,11 @@ const findAll = async (modelName, options = {}) => {
   return await model.findAll(options);
 }
 
+const findOne = async (modelName, options ={}) => {
+  const model = getModelDefinitions()[modelName];
+  return await model.findOne(options);
+}
+
 const findByPk = async (modelName, pk) => {
   const model = getModelDefinitions()[modelName];
   return await model.findByPk(pk);
@@ -95,6 +100,7 @@ module.exports = {
   update,
   destroy,
   findAll,
+  findOne,
   findByPk,
   query,
   getModelDefinitions,
