@@ -75,9 +75,9 @@ export class Profile extends LitElement {
      
         <fieldset class='${!this.showPasswordChangeInputs ? '' : 'hide'}'> 
             <label>Username</label><br>
-            <input id='username' class='input-style' type='text' .value="${this.user.Username}"><br><br>
+            <input id='username' class='input-style' type='text' value="${this.user.Username}"><br><br>
             <label>Email</label><br>
-            <input id='email' class='input-style' type='email'><br><br>
+            <input id='email' class='input-style' type='email' value="${this.user.Email}"><br><br>
      
             </fieldset>
 
