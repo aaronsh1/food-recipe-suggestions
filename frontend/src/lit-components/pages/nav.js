@@ -16,19 +16,19 @@ export class NavBar extends LitElement {
     render() {
         return html`
         <header>
-            <a href="#" id="profile">
+            <a href="/profile" id="profile">
                 <img src="/public/images/userprofile.svg" alt="profile">
             </a>
             <nav class="navbar">
                 <ul class="navMenu">
-                    <li><a href="#" class="navItem">Home</a></li>
-                    <li><a href="#" class="navItem">Search</a></li>
-                    <li><a href="#" class="navItem">Favourites</a></li>
+                    <li><a href="/home" class="navItem">Home</a></li>
+                    <li><a href="/search" class="navItem">Search</a></li>
+                    <li><a href="/favourites" class="navItem">Favourites</a></li>
                 </ul>
             </nav>
-            <a href="#" id="signup"><button>Sign-up</button></a>
-            <a href="#"><button>Login</button></a>
-            <img class="logo" src="/public/images/logo.svg" alt=""logo">
+            <a href="/signup" id="signup"><button>Sign-up</button></a>
+            <a href="/login"><button>Login</button></a>
+            <a href="/home"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
         </header>
         `;
     }
