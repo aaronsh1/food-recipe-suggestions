@@ -1,19 +1,36 @@
 const express = require("express");
-const pantryRouter = express();
+const pantryRouter = express.Router();
+const { ModelNames, findAll } = require("../database/datasource");
+const { Op } = require("sequelize");
 
-pantryRouter.get("/pantry", (req, res) => {
+
+pantryRouter.get("/pantry", async (req, res) => {
     let userId = req.query.id;
     
-    let inventory
-    // perform query on db to get inventory
+    let ingredientIds = (await findAll(ModelNames.Pantry, {
+        where: {
+            UserId: userId
+        }
+    })).dataValues;
 
-    res.send(inventory);
+    let pantry = findAll(ModelNames.Ingredient, {
+        where: {
+            IngredientId: {
+                [Op.in]: ingredientIds.map(
+                    item => item.IngredientId
+                )
+            }
+        }
+    }).dataValues;
+
+    res.send("ok");
 })
 
 pantryRouter.post("/pantry", (req, res) => {
     let userId = req.query.id;
     let ingredients = [...req.query.ingredients];
-    // enter on db
+    
+
     res.send("ok");
 })
 
