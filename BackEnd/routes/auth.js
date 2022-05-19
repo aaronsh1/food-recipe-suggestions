@@ -26,10 +26,6 @@ authRouter.post('/login', async (req, res) => {
   const token = sign({
     UserId: data.UserId,
     username,
-  }, {
-    audience: 'user',
-    issuer: 'food-recipe-suggestions-be',
-    subject: req.body.username,
   });
 
   res.send({
