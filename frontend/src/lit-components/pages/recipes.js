@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { RecipesStyles } from '../../styles';
+import { fetchApi } from '../../api/fetchApi';
 
 export class Recipes extends LitElement {
   static styles = RecipesStyles;
@@ -11,40 +12,73 @@ export class Recipes extends LitElement {
   constructor() {
     super();
 
+    let ingredientIds = null;
+    this.recipesArr = [];
+
     try {
-      let queryParamString = window.location.href.replace(/http(s)?:\/\/.+\?/, '') //Remove full route
-      let ingredientIds = queryParamString.split("&").map(param => param.split("=")[1]);
+      let queryParamString = window.location.href.replace(/http(s)?:\/\/.+\/\??/, '') //Remove full route
 
-      ingredientIds.forEach(element => {
-        
-      });
+      console.log(queryParamString);
 
-      this.recipe = this.getRecipe(recipeIdInt);
+      if (queryParamString.length !== 0) {
+        ingredientIds = queryParamString.split("&").map(param => param.split("=")[1]).map((element) => Number.parseInt(element));
+      }
+
+      console.log(ingredientIds);
 
     } catch {
-      this.redirectToRecipesPage();
+      ingredientIds = null;
     }
 
-    this.recipesArr = this.getRecipes();
+    if (!ingredientIds) {
+      console.log("All");
+      this.getAllRecipes();
+
+    } else {
+      console.log("Search");
+      this.getSearchRecipes(ingredientIds);
+    }
   }
 
-  getRecipes(ingredients) {
-    return [
-      {
-        RecipeId: 0,
-        RecipeName: "Lasagna",
-        Description: "This is a very long and detailed description of how to make the above mentioned delicious food item.",
-        Image: "public/images/lily-banse--YHSwy6uqvk-unsplash.jpg",
-        Author: "Johann Schepers"  
-      },
-      {
-        RecipeId: 1,
-        RecipeName: "Pizza",
-        Description: "This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.This is a very long and detailed description of how to make the above mentioned delicious food item.",
-        Image: "public/images/lily-banse--YHSwy6uqvk-unsplash.jpg",
-        Author: "Johann Schepers"  
+  async getSearchRecipes(ingredients) {
+
+    try {
+      let res = await fetchApi({
+        endpoint: 'recipe/search',
+        method: 'POST',
+        data: {IngredientIds: ingredients}
+      });
+
+      if (res.status != 200) {
+        alert("Server returned error code: " + res.status);
+        return;
       }
-    ]
+
+      this.recipesArr = res.data;
+
+    } catch (error){
+      alert("Something bad went wrong: " + JSON.stringify(error));
+    }
+  }
+
+  async getAllRecipes() {
+
+    try {
+      let res = await fetchApi({
+        endpoint: 'recipe/all',
+        method: 'GET',
+      });
+
+      if (res.status != 200) {
+        alert("Server returned error code: " + res.status);
+        return;
+      }
+
+      this.recipesArr = res.data;
+
+    } catch (error){
+      alert("Something bad went wrong: " + JSON.stringify(error));
+    }
   }
 
   render() {
@@ -54,6 +88,8 @@ export class Recipes extends LitElement {
         <section class="pageHead">
           <h1>Browse Recipes...</h1>
         </section>
+
+        ${(this.recipesArr.length == 0)? html`<p>No Results :(</p>` : ''}
 
         ${this.recipesArr.map(
           recipe => html `<recipe-card class="recipeCard" recipeId=${recipe.RecipeId} name=${recipe.RecipeName} image=${recipe.Image} description=${recipe.Description} author=${recipe.Author}></recipe-card>`

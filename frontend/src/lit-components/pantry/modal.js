@@ -15,16 +15,50 @@ export class AddIngredientModal extends LitElement {
         this.title = "Add Ingredient";
         fetchApi({
             endpoint: 'ingredient/all',
-            method: "GET"
+            method: "GET",
+            token: window.localStorage.getItem("token")
         })
         .then(res => {
             if(res.status == 200) {
+                console.log(JSON.stringify(res.data))
                 this.ingredientList = res.data;
             }
         })
         .catch(err => {
             console.log(err)
         });
+    }
+
+    addIngredient = () => {
+        // let addIngredientForm = document.getElementsByClassName("add-ingredient-form");
+        // console.log(addIngredientForm);
+        // let form = FormData(addIngredientForm);
+        let ingredient = this.shadowRoot.querySelector("#modal-dropdown").value;
+        console.log(ingredient);
+    
+        // let ingredientToAdd = {
+        //     "Ingredients": [ingredient]
+        // }
+    
+        fetchApi({
+            endpoint: 'pantry',
+            data: {
+                "Ingredients": [ingredient]
+            },
+            method: "POST",
+            token: window.localStorage.getItem("token")
+        })
+        .then(res => {
+            if(res.status == 200) {
+                this.shadowRoot.querySelector("#add-ingredient-modal").remove();
+                document.querySelector("#screen-film").remove();
+            }
+        })
+        .catch(err => {
+            console.log("ERR: " + err)
+        })
+
+        window.location.href = '/pantry';
     }
 
     render() {
@@ -41,12 +75,12 @@ export class AddIngredientModal extends LitElement {
                 <header class="add-ingr-modal-title">${this.title}</header>
                 <form class="add-ingredient-form">
                     <label class="add-modal-form-element" name="ingredient">Choose Category</label>
-                    <select class="add-modal-form-element" id="modal-dropdown" name="ingredient">
+                    <select onfocus='this.size=3;' onblur='this.size=1;' onchange='this.size=1; this.blur();'class="add-modal-form-element" id="modal-dropdown" name="ingredient">
                     ${this.ingredientList.map(
-                        item =>  html`<option class="ingredient-option" value=${item.id}>${item.name}</option>`
+                        item =>  html`<option class="ingredient-option" value=${item.IngredientId}>${item.IngredientName}</option>`
                     )}
                     </select>
-                    <input class="add-modal-form-element" id="add-ingredient-submit" type="submit" value="Done" />
+                    <button type="button" class="add-modal-form-element" id="add-ingredient-submit" @click=${this.addIngredient}>Done</button>
                 </form>
             </section>
         `
