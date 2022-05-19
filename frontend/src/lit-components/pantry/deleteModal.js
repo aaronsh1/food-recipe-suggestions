@@ -26,6 +26,7 @@ export class DeleteModal extends LitElement {
         // })
 
         console.log(id);
+        console.log(this);
         this.shadowRoot.querySelector("#delete-ingredient-modal").remove();
         document.querySelector("#screen-film").remove();
     }

@@ -22,6 +22,10 @@ export const NavStyles = css`
         padding: 30px 2.5%;
     }
 
+    .navbar {
+        display: flex;
+    }
+
     .navMenu {
         list-style: none;
     }
@@ -67,5 +71,40 @@ export const NavStyles = css`
 
     .logo {
         margin-left: 20px;
+    }
+
+    .burger {
+        display: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .hide{
+            display: none;
+        }
+
+        body{
+            position: fixed;
+        }
+
+        .burger {
+            display: block;
+            width: 20%;
+        }
+
+        nav-sidebar {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            z-index: 3;
+            background-color: #FF7C0A;
+            right: 0px;
+            width: 60%;
+        }
+    }
+
+    @media only screen and (min-width: 600px) {
+        nav-sidebar {
+            display: none;
+        }
     }
 `;
