@@ -49,7 +49,7 @@ export class Home extends LitElement {
 
   searchRecipes = () => {
     const stringToSearch = queryString.stringify({search: this.searchIds});
-    window.location.href = `/searchTemp/?${stringToSearch}`;
+    window.location.href = `/recipe/?${stringToSearch}`;
   }
 
   render() {
