@@ -1,4 +1,5 @@
 import { html, css, LitElement } from 'lit';
+import { fetchApi } from '../../api/fetchApi';
 import { PantryStyles } from '../../styles/pantry';
 
 export class Pantry extends LitElement {
@@ -13,111 +14,34 @@ export class Pantry extends LitElement {
         this.getPantry();
     }
 
-    apiUrl = "placementforurl";
-
     getPantry = () => {
+        let token = window.localStorage.getItem("token");
+
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        console.log(JSON.parse(jsonPayload));
+
+
         let pantrySection = document.querySelector("#ingredient-pantry");
-        // fetch(apiUrl+"/pantry", new URLSearchParams({
-        //     id: 1,
-        // }))
-        // .then(response => response.json())
-        // .then(data.map(
-        //     ingredient => this.ingredientArr.add(ingredient)
-        // ));
-    
-        const ingredientArr = [
-            {
-                id: 1,
-                name: "apple",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "banana",
-                image: "/public/images/ingredients/croissant.png"
-            },
-            {
-                id: 1,
-                name: "carrot",
-                image: "/public/images/ingredients/croissant.png"
-            },
-        ];
-        this.ingredientArr = ingredientArr;
+        // fetchApi({
+        //     endpoint: 'pantry',
+        //     data: {
+        //         UserId: 1
+        //     },
+        //     method: "GET"
+        // })
+        // .then(res => {
+        //     if (res.status == 200) {
+        //         console.log(data);
+        //         this.ingredientArr = data;
+        //     }
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // })
     }
     
     addIngredientsToPage = (ingredient, pantrySection) => {
@@ -134,23 +58,26 @@ export class Pantry extends LitElement {
         let form = FormData(addIngredientForm);
     
         let ingredientToAdd = {
-            "User": form.user,
-            "Name": form.name
+            "UserId": 1,
+            "IngredientId": form.ingredient.value
         }
     
-        fetch(apiUrl, {
-            method: "POST",
-            body: ingredientToAdd
+        fetchApi({
+            endpoint: 'pantry',
+            data: {
+                ingredientToAdd
+            },
+            method: "POST"
         })
-        .then((res) => {
-            console.log(res);
+        .then(res => {
+            if(res.status == 200) {
+                this.shadowRoot.querySelector("#add-ingredient-modal").remove();
+                document.querySelector("#screen-film").remove();
+            }
         })
-        .catch((err) => {
-            console.log(err);
+        .catch(err => {
+            console.log(err)
         })
-    
-        let bodyChildren = document.querySelectorAll("body > *:not(add-ingredient-modal)");
-        bodyChildren.forEach(child => child.classList -= " blur");
     }
     
     modalPopUp = () => {
@@ -169,9 +96,6 @@ export class Pantry extends LitElement {
         document.body.appendChild(screenFilm);
         let modalToAdd = document.createElement("add-ingredient-modal");
         document.body.appendChild(modalToAdd);
-        let bodyChildren = document.querySelector("pantr-a");
-        // bodyChildren.classList += " blur";
-        bodyChildren.forEach(child => child.classList += " blur");
     }
     
     // Handlers
@@ -180,7 +104,6 @@ export class Pantry extends LitElement {
     }
     
     addIngredientButtonHandler = () => {
-        // adjust css to blur background and modal pop up
         this.modalPopUp();
         document.querySelector("#add-ingredient-submit").addEventListener("click", submitIngredientHandler);
     }

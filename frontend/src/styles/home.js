@@ -1,10 +1,8 @@
 import { css } from 'lit';
 
 export const HomeStyles = css`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
   * {
-    font-family: 'Inter', sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -70,12 +68,12 @@ export const HomeStyles = css`
     background: rgba(255, 255, 255, 0.61);
     border: 1px solid #E9C46A;
     border-radius: 30px;
-    width: 700px;
+    width: 70%;
     height: 35px;
     padding: 6px;
     margin-top: 10px;
   }
-  
+
   input[type=search] {
     flex-grow: 2;
     border: none;
@@ -83,11 +81,11 @@ export const HomeStyles = css`
     padding: 3px 15px;
     font-size: 16px;
   }
-  
+
   input[type=search]:focus {
     outline: none;
   }
-  
+
   .search-button {
     border: none;
     padding: 1px 5px;
@@ -199,5 +197,33 @@ export const HomeStyles = css`
     margin-top: 10px;
     list-style: none;
     color: #C3E1DE;
+  }
+
+  #chips-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  @media only screen and (max-width: 1050px) {
+    .food-pics {
+      display: none;
+    }
+
+    .home-footer {
+      display: none;
+    }
+
+    .search-form {
+      min-width: fit-content;
+      width: 70%;
+    }
+
+    .search-bar::placeholder {
+      font-size: small;
+    } 
+
+    #question, #view{
+      font-size: small;
+    }
   }
 `;

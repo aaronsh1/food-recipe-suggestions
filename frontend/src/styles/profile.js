@@ -29,12 +29,22 @@ h2 {
     clip-path: circle(65px at 50% 50%);
 }
 
-@media (min-width: 768px) {
+@media (max-width: 500px) {
+    .apply-button {
+        float: none;
+    }
+  }
+
+@media (min-width: 500px) {
 
     .input-style {
         width: 350px;
         padding: 10px;
         font-size: large;
+    }
+
+    .apply-button {
+        float: right;
     }
   }
  
@@ -133,6 +143,7 @@ h2 {
     border-radius: 50px;
     cursor: pointer;
     transition: all o.3s ease 0s;
+    margin: 5px;
 }
 
 
@@ -145,7 +156,6 @@ h2 {
 }
 
 .apply-button {
-    float: right;
     color: white;
 }
 

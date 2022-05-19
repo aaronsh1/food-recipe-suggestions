@@ -33,17 +33,20 @@ export class Favourites extends LitElement {
 
   render() {
     return html`
-      <main>
+      <section class='favourites-container'>
         <header><h1>Your Favourite Recipes</h1></header>
 
+        <ul class='recipes-container'>
         ${this.recipes.map((i,index) => html`
         
-        <recipe-card id='${index}' .name='${i.RecipeName}' .description='${i.Description}' @click='${this._recipeClicked}'></recipe-card>
+        <recipe-card recipeId='${i.RecipeId}' name='${i.RecipeName}' .description='${i.Description}' image='${i.Image}' author='${i.Author}' @click='${this._recipeClicked}'></recipe-card>
         
         
         `)}
 
-      </main>
+        </ul>
+
+      </section>
     `;
   }
 

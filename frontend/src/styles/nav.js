@@ -17,9 +17,15 @@ export const NavStyles = css`
 
     header {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         padding: 30px 2.5%;
+    }
+
+    .navbar {
+        display: flex;
+        margin-right: auto;
+        justify-content: space-around;
     }
 
     .navMenu {
@@ -65,7 +71,46 @@ export const NavStyles = css`
         margin-left: 20px;
     }
 
-    .navbar {
-        margin-right: auto;
+    .burger {
+        display: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .hide{
+            display: none;
+        }
+
+        body{
+            position: fixed;
+        }
+
+        .burger, .navbar-pic {
+            display: block;
+            width: 20%;
+        }
+
+        .navbar-pic img {
+            width: 100%;
+        }
+
+        nav-sidebar {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            z-index: 3;
+            background-color: #FF7C0A;
+            right: 0px;
+            width: 60%;
+        }
+
+        .navbar {
+            display: none;
+        }
+    }
+
+    @media only screen and (min-width: 600px) {
+        nav-sidebar {
+            display: none;
+        }
     }
 `;
