@@ -34,24 +34,8 @@ export class PantryIngredient extends LitElement {
         document.body.appendChild(screenFilm);
         let modalToAdd = document.createElement("delete-modal");
         modalToAdd.setAttribute("ingredientId", this.id)
+        modalToAdd.setAttribute("ingredientName", this.name)
         document.body.appendChild(modalToAdd);
-    }
-
-    deleteIngredient = () => {
-        // fetch(apiUrl, {
-        //     method: "DELETE",
-        //     body: ingredientId
-        // })
-        // .then((res) => {
-        //     console.log(res);
-        // })
-        // .catch((err) => {
-        //     console.log(err);
-        // })
-
-        document.querySelector("#delete-ingredient-modal").classList += " show-modal"
-
-        console.log(`delete ingredient: ${this.id}`);
     }
 
     render() {
