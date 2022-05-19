@@ -13,6 +13,11 @@ export class NavSidebar extends LitElement {
         super();
     }
 
+    handleLogout() {
+        window.localStorage.removeItem('token');
+        window.location.href = "/login"
+    }
+
     render() {
         return html`
         <header class="nav-side">
@@ -26,8 +31,14 @@ export class NavSidebar extends LitElement {
                     <li><a href="/favourites" class="navItem sidebar">Favourites</a></li>
                     <li><a href="/profile" class="navItem sidebar">Profile</a></li>
                     <li><a href="/recipes/" class="navItem sidebar">Recipes</a></li>
-                    <li><a href="/register" id="signup" class="sidebar">Sign-up</a></li>
-                    <li><a href="/login" class="sidebar">Login</a></li>
+                    ${(!window.localStorage.getItem("token"))? 
+                        html`<li><a href="/register" id="signup" class="navItem sidebar"><button>Sign-up</button></a></li>
+                                <li><a href="/login" class="navItem sidebar"><button>Login</button></a></li>` : 
+                        html`
+                            <li><a href="/pantry/" class="navItem sidebar">My Pantry</a></li>
+                            <li><a @click="${() => this.handleLogout()}" class="navItem sidebar">Logout</a></li>
+                            `
+                    }
                     <li><a href="/home" class="sidebar"><img class="logo" src="/public/images/logo.svg" alt="logo"></a></li>
             </nav>
         </header>

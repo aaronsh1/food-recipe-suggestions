@@ -49,7 +49,7 @@ export class Pantry extends LitElement {
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
         `
-        screenFilm.setAttribute("id", "screen-film")
+        screenFilm.setAttribute("id", "screen-film");
         document.body.appendChild(screenFilm);
         let modalToAdd = document.createElement("add-ingredient-modal");
         document.body.appendChild(modalToAdd);
