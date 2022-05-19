@@ -13,6 +13,34 @@ export class Home extends LitElement {
     super();
   }
 
+  chipIngredientsR1 = ["egg", "pasta", "carrot"];
+  chipIngredientsR2 = ["tomato", "bacon", "chicken", "beef", "strawberries"];
+
+  addChips = () => {
+    let chips = html`<input id="first-ingredient" type="button" value="milk" @click="${() => {this.searchChip("milk")}}">`;
+    this.chipIngredientsR1.forEach((ingredient) => {
+      chips = html`
+                ${chips}
+                <input type="button" value=${ingredient} @click="${() => {this.searchChip(ingredient)}}">
+              `;
+    });
+    chips = html`
+              ${chips}
+              <br>
+            `;
+    this.chipIngredientsR2.forEach((ingredient) => {
+      chips = html`
+                ${chips}
+                <input type="button" value=${ingredient} @click="${() => {this.searchChip(ingredient)}}">
+              `;
+    });
+    return chips;
+  };
+
+  searchChip = (ingredient) => {
+    console.log(ingredient);
+  }
+
   render() {
     return html`
       <main>
@@ -21,16 +49,7 @@ export class Home extends LitElement {
           <p id="question">Having trouble coming up with different meals everyday?</p>
           <p id="view">View hundreds of recipes filtered by the ingredients in YOUR pantry!</p>
           <form>
-            <input id="first-ingredient" type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
-            <br>
-            <input type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
-            <input type="button" value="Ingredient"/>
+            ${this.addChips()}
           </form>
           <form class="search-form">
             <input type="search" placeholder="Search ingredients and recipes..."/>
