@@ -36,4 +36,20 @@ export const RecipeCardStyles = css`
     opacity: 0;
     transition: visibility 0s 1s, opacity 1s linear;
   }
+  
+  @media (max-width: 900px) {
+    article {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    aside {
+      margin: 0px;
+      width: fit-content;
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
 `;
