@@ -1,12 +1,10 @@
 const express = require("express");
-const pantryRouter = express();
+const pantryRouter = express.Router();
 const authMiddleware = require("../authMiddleware");
 const { ModelNames, findAll, bulkCreate, destroy } = require("../database/datasource");
 const { Op } = require("sequelize");
 
-pantryRouter.use(authMiddleware);
-
-pantryRouter.get("/pantry", async (req, res) => {
+pantryRouter.get("/pantry", authMiddleware, async (req, res) => {
 
     try{
         let userId = req.UserId;
@@ -18,7 +16,7 @@ pantryRouter.get("/pantry", async (req, res) => {
         })).map(
             item => item.dataValues
         );
-    
+
         let pantry = (await findAll(ModelNames.Ingredient, {
             where: {
                 IngredientId: {
@@ -30,7 +28,7 @@ pantryRouter.get("/pantry", async (req, res) => {
         })).map(
             item => item.dataValues
         );
-    
+
         res.send(pantry);
     } catch(err) {
         res.status(500).send(err);
@@ -39,7 +37,7 @@ pantryRouter.get("/pantry", async (req, res) => {
 
 })
 
-pantryRouter.post("/pantry", async (req, res) => {
+pantryRouter.post("/pantry", authMiddleware, async (req, res) => {
     try{
         console.log("starting post");
         let userId = req.UserId;
@@ -59,7 +57,7 @@ pantryRouter.post("/pantry", async (req, res) => {
 
 })
 
-pantryRouter.delete("/pantry", async (req, res) => {
+pantryRouter.delete("/pantry", authMiddleware, async (req, res) => {
     try{
         let userId = req.UserId;
         let ingredientsToDelete = [...req.body.IngredientId];
@@ -69,14 +67,13 @@ pantryRouter.delete("/pantry", async (req, res) => {
         } else {
             ingredientsToDelete.forEach(ingredient => deleteIngredient(userId, ingredient))
         }
-    
+
         res.send();
     }catch(err) {
         res.status(500).send(err);
     }
 
-})
-
+});
 
 const deleteIngredient = async (userId, ingredientId) => {
     const data = await destroy(ModelNames.Pantry, {

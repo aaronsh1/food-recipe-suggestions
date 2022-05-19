@@ -1,5 +1,5 @@
 const express = require("express");
-const ingredientRouter = express();
+const ingredientRouter = express.Router();
 const { ModelNames, create, findByPk, findAll } = require("../database/datasource");
 const { Op } = require("sequelize");
 
