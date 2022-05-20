@@ -40,7 +40,7 @@ export class PantryIngredient extends LitElement {
 
     render() {
         return html `
-        <article class="ingredient-block">
+        <article @click='${this.changeColor}' class="ingredient-block ${this.selected ? 'selected' : 'unselected'}">
             <button alt="delete icon" class="delete-ingredient"><img src="/public/images/ingredients/delete.png" @click=${this.deleteModalPopUp}/></button>
             <img src=${this.image} alt="ingredient-pic"  class="ingredient-pic"/>
             <footer class="ingredient-name">${this.name}</footer>
