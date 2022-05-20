@@ -98,7 +98,7 @@ export class Pantry extends LitElement {
         <h2 class="pantry-subheading">View all of your current ingredients and add/remove</h2>
         <section id="search-bar">
         <label class="scoreboard">Selected items: ${this.selectedNm}/${this.forSearch.length} </label>
-            <button @click="${this.outItems}" id="search-button">Find Recipe</button>
+            <button @click="${() => window.location.href = "/recipes?searchitem=1"}" id="search-button">Find Recipe</button>
         </section>
         <section id="ingredient-pantry">
         ${
