@@ -15,8 +15,6 @@ export class Pantry extends LitElement {
         super();
         this.ingredientArr = [];
         this.getPantry();
-        this.forSearch = new Array(this.ingredientArr.length).fill(false);
-
     }
 
     getPantry = () => {
@@ -31,6 +29,7 @@ export class Pantry extends LitElement {
                 // console.log(JSON.stringify(res.data));
                 // this.ingredientArr = JSON.parse(JSON.stringify(res.data));
                 this.ingredientArr = res.data;
+                this.forSearch = new Array(this.ingredientArr.length).fill(false);
             }
         })
         .catch(err => {
@@ -106,7 +105,7 @@ export class Pantry extends LitElement {
             this.ingredientArr.map(
                 (ingr,i) => {
                 return html `
-                    <pantry-ingredient id='${i}' @click='${this._ingredientClicked}' class='ingredient' .selected='${this.forSearch[i]}' name=${ingr.name} image=${ingr.image} name="${ingr.IngredientName}" image="${ingr.Image}" id="${ingr.IngredientId}"></pantry-ingredient>
+                    <pantry-ingredient @click='${() => this._ingredientClicked(i)}' class='ingredient' name="${ingr.IngredientName}" image="${ingr.Image}" id="${ingr.IngredientId}"></pantry-ingredient>
                 `;
                 }
             )
@@ -116,11 +115,10 @@ export class Pantry extends LitElement {
         `;
     }
 
-    _ingredientClicked(e) {
-        let index = e.target.id;
+    _ingredientClicked(i) {
+        let index = i;
 
         this.forSearch[index]  = !this.forSearch[index];
-        console.log(this.selectedNum())
         this.selectedNm=this.selectedNum()
 
 

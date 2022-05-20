@@ -20,7 +20,6 @@ export const PantryStyles = css`
     border-radius: 20%;
     background-color: #E76F51;
     border: none;
-    position: fixed;
     
     float: right;
     z-index: 1;

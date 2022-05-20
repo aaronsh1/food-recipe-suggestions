@@ -7,7 +7,8 @@ export class PantryIngredient extends LitElement {
     static properties = {
         id: 0,
         name: "",
-        image: ""
+        image: "",
+        selected: {type: Boolean}
     }
 
     constructor(id, name, image) {
@@ -15,6 +16,7 @@ export class PantryIngredient extends LitElement {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.selected = false;
     }
 
     deleteModalPopUp = () => {
@@ -36,6 +38,12 @@ export class PantryIngredient extends LitElement {
         modalToAdd.setAttribute("ingredientId", this.id)
         modalToAdd.setAttribute("ingredientName", this.name)
         document.body.appendChild(modalToAdd);
+    }
+
+    changeColor(){
+
+        this.selected= !this.selected;
+        
     }
 
     render() {
