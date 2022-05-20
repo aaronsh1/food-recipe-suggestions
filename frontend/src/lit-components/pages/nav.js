@@ -18,6 +18,7 @@ export class NavBar extends LitElement {
         document.querySelector("#screen-film").remove();
         this.shadowRoot.querySelector("#this-navbar").innerHTML = this.oldDom;
         this.shadowRoot.querySelector(".burger").onclick = this.displayBurgerMenu;
+        this.shadowRoot.querySelector("#logoutButton").onclick = this.handleLogout;
     }
 
     displayBurgerMenu = () => {
@@ -71,7 +72,7 @@ export class NavBar extends LitElement {
             ${(!window.localStorage.getItem("token"))? 
                 html`<a href="/register" id="signup" class="hide"><button>Sign-up</button></a>
                         <a href="/login" class="hide"><button>Login</button></a>` : 
-                html`<button class="hide" @click="${() => this.handleLogout()}">Logout</button>`
+                html`<button id="logoutButton" class="hide" @click="${() => this.handleLogout()}">Logout</button>`
             }
             
             <a href="/home" class="hide"><img class="logo" src="/public/images/logo.svg" alt="logo"></a>
