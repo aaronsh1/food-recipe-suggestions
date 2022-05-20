@@ -97,7 +97,7 @@ export class Pantry extends LitElement {
         <h1>My Pantry</h1>
         <h2 class="pantry-subheading">View all of your current ingredients and add/remove</h2>
         <section id="search-bar">
-        <label>Selected items: ${this.selectedNm}/${this.forSearch.length} </label>
+        <label class="scoreboard">Selected items: ${this.selectedNm}/${this.forSearch.length} </label>
             <button @click="${this.outItems}" id="search-button">Find Recipe</button>
         </section>
         <section id="ingredient-pantry">
