@@ -30,8 +30,8 @@ export class NavSidebar extends LitElement {
                     <li><a href="/favourites" class="navItem sidebar">Favourites</a></li>
                     <li><a href="/recipes/" class="navItem sidebar">Recipes</a></li>
                     ${(!window.localStorage.getItem("token"))? 
-                        html`<li><a href="/register" id="signup" class="navItem sidebar"><button>Sign-up</button></a></li>
-                                <li><a href="/login" class="navItem sidebar"><button>Login</button></a></li>` : 
+                        html`<li><a href="/register" id="signup" class="navItem sidebar">Sign-up</a></li>
+                                <li><a href="/login" class="navItem sidebar">Login</a></li>` : 
                         html`
                             <li><a href="/pantry/" class="navItem sidebar">My Pantry</a></li>
                             <li><a @click="${() => this.handleLogout()}" class="navItem sidebar">Logout</a></li>
