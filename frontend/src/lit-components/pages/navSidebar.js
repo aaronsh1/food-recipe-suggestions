@@ -21,7 +21,7 @@ export class NavSidebar extends LitElement {
     render() {
         return html`
         <header class="nav-side">
-            <a href="/profile" id="profile">
+            <a href=${(!window.localStorage.getItem("token"))? "/login" :"/profile"} id="profile">
                 <img src="/public/images/userprofile.svg" alt="profile">
             </a>
             <nav class="navbar">

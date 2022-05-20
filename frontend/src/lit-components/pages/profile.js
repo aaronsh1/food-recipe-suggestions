@@ -88,18 +88,17 @@ export class Profile extends LitElement {
 
             <fieldset class='${this.showPasswordChangeInputs ? '' : 'hide'}'>                    
                 <label>Current Password</label><br>
-                <input id='currentPass' readclass='input-style' type='password' ><br><br>
+                <input id='currentPass' class='input-style' type='password' ><br><br>
 
                 <label >New Password</label><br>
                 <input id='newPass' class='input-style' type='password'><br><br>
 
                 <label >Confirm New Password</label><br>
-                <input id='confirmPass' class='input-style' type='password'>  <br><br>       
+                <input id='confirmPass' class='input-style' type='password'>  <br><br> 
+                <button class='button-general discard-button' @click="${this._discard}" type='button'>Discard Changes</button>
+
+                <button class='button-general apply-button' @click="${this._apply}" type='button'>Apply Changes</button><br>      
             </fieldset>
-
-            <button class='button-general discard-button' @click="${this._discard}" type='button'>Discard Changes</button>
-
-            <button class='button-general apply-button' @click="${this._apply}" type='button'>Apply Changes</button><br>
 
         </form>
 
@@ -123,8 +122,6 @@ export class Profile extends LitElement {
 _discard(e) {
     this.showPasswordChangeInputs = false;
     this.collapseBanner = false;
-    this.shadowRoot.getElementById("username").value = '';
-    this.shadowRoot.getElementById("email").value = '';
   
     this.shadowRoot.getElementById("currentPass").value = '';
     this.shadowRoot.getElementById("newPass").value = '';
@@ -159,41 +156,8 @@ _apply(e) {
 
 
   }
-  else
-  {
-    var formUsername = this.shadowRoot.getElementById("username").value;
-    var formEmail= this.shadowRoot.getElementById("email").value;
-    if (formEmail !== this.user.Email)
-    {
-      this.changeEmail(formEmail);
-    }
+
   
-  }
-
-console.log(formUsername);
-console.log(this.user.Username);
-
-  //const hashPassword = crypto.createHash('sha256').update(password + data.Salt).digest("hex")
-  
-}
-
-
-
-
-changeEmail(email) {
-  fetchApi({
-    endpoint: 'profile/setEmail',
-    data: {
-      Username: this.user.UserId,
-      Email: email ,
-    },
-    method: 'PUT',
-  })
-  .then(res => {
-
-    if (res.status === 200) {
-    }
-  });
 }
 }
 customElements.define('profile-page', Profile);
