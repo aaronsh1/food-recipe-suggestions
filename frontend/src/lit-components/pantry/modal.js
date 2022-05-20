@@ -30,15 +30,7 @@ export class AddIngredientModal extends LitElement {
     }
 
     addIngredient = () => {
-        // let addIngredientForm = document.getElementsByClassName("add-ingredient-form");
-        // console.log(addIngredientForm);
-        // let form = FormData(addIngredientForm);
         let ingredient = this.shadowRoot.querySelector("#modal-dropdown").value;
-        console.log(ingredient);
-    
-        // let ingredientToAdd = {
-        //     "Ingredients": [ingredient]
-        // }
     
         fetchApi({
             endpoint: 'pantry',
@@ -52,13 +44,12 @@ export class AddIngredientModal extends LitElement {
             if(res.status == 200) {
                 this.shadowRoot.querySelector("#add-ingredient-modal").remove();
                 document.querySelector("#screen-film").remove();
+                window.location.href = '/pantry';
             }
         })
         .catch(err => {
-            console.log("ERR: " + err)
+            console.log("ERR: " + err);
         })
-
-        window.location.href = '/pantry';
     }
 
     render() {

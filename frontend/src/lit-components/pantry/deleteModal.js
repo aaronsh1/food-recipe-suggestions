@@ -28,12 +28,13 @@ export class DeleteModal extends LitElement {
             if(res.status == 200) {
                 this.shadowRoot.querySelector("#delete-ingredient-modal").remove();
                 document.querySelector("#screen-film").remove();
+                window.location.href = '/pantry';
             }
         })
         .catch(err => {
             console.log(err);
         })
-        window.location.href = '/pantry';
+        
     }
 
     noClickHandler = () => {
