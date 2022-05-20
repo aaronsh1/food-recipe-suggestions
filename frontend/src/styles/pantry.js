@@ -15,19 +15,34 @@ export const PantryStyles = css`
 }
 
 #search-button {
-    margin: auto;
-    color: white;
-    border-radius: 20%;
-    background-color: #E76F51;
+    width: 10%;
+    height: 10%;
+    padding: 1.25% 1%;
+    border-radius: 1em;
     border: none;
-    
-    float: right;
-    z-index: 1;
+    margin: auto;
+    background-color: #E76F51;
     box-shadow: grey 0.4em 0.4em 1em;
     transition: 0.3s;
+    color: white;
+    margin-left: 1%;
 }
 
-
+#search-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 15%;
+}
+.scoreboard {
+    padding: 1%;
+    background: #2A9D8F;
+    border-radius: 1em;
+    box-shadow: grey 0.5em 0.5em 0.5em;
+    color: white;
+    margin: auto;
+    margin-right: 1%;
+    font-size: small;
+}
 
 
 
@@ -84,8 +99,24 @@ body {
     background-color: #E45C3A;
 }
 
-.blur {
-    filter: blur(4px);
-    transition: 0.5s;
+@media only screen and (max-width: 600px) {
+    #search-bar {
+        flex-direction: column;
+        justify-content: space-around;
+        margin: auto;
+    }
+
+    .scoreboard {
+        margin: auto;
+        padding: 3%;
+    }
+
+    #search-button{
+        margin: auto;
+        width: fit-content;
+        padding: 3%;
+        margin-top: 3%;
+    }
 }
+
 `
