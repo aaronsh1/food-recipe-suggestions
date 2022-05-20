@@ -6,13 +6,17 @@ export class Pantry extends LitElement {
     static styles = PantryStyles;
 
     static properties = {
-        ingredientArr: []
+        ingredientArr: [],
+        forSearch: [],
+        selectedNm:0
     }
 
     constructor() {
         super();
         this.ingredientArr = [];
         this.getPantry();
+        this.forSearch = new Array(this.ingredientArr.length).fill(false);
+
     }
 
     getPantry = () => {
@@ -49,7 +53,7 @@ export class Pantry extends LitElement {
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
         `
-        screenFilm.setAttribute("id", "screen-film");
+        screenFilm.setAttribute("id", "screen-film")
         document.body.appendChild(screenFilm);
         let modalToAdd = document.createElement("add-ingredient-modal");
         document.body.appendChild(modalToAdd);
@@ -65,17 +69,44 @@ export class Pantry extends LitElement {
         document.querySelector("#add-ingredient-submit").addEventListener("click", submitIngredientHandler);
     }
 
+    addIngredientButtonHandler = () => {
+        // adjust css to blur background and modal pop up
+        this.modalPopUp();
+        document.querySelector("#add-ingredient-submit").addEventListener("click", submitIngredientHandler);
+    }
+
+    selectedNum= ()=> {
+        let i=0;
+        this.forSearch.forEach(x=>{if(x)i++})
+        return i;
+       }
+
+       outItems=() =>{
+        let arr=[];
+        this.forSearch.forEach((element,index) => {
+            if(element)
+            {
+                arr.push(this.ingredientArr[index].id)
+            }
+        })
+        let url=arr.map='/receipes/?'+arr.map(item=>'item=&{item}').join('&')
+        window.location.href=url;
+    }
+
     render() {
         return html`
         <h1>My Pantry</h1>
         <h2 class="pantry-subheading">View all of your current ingredients and add/remove</h2>
-    
+        <section id="search-bar">
+        <label>Selected items: ${this.selectedNm}/${this.forSearch.length} </label>
+            <button @click="${this.outItems}" id="search-button">Find Recipe</button>
+        </section>
         <section id="ingredient-pantry">
         ${
             this.ingredientArr.map(
-                ingr => {
+                (ingr,i) => {
                 return html `
-                    <pantry-ingredient name="${ingr.IngredientName}" image="${ingr.Image}" id="${ingr.IngredientId}"></pantry-ingredient>
+                    <pantry-ingredient id='${i}' @click='${this._ingredientClicked}' class='ingredient' .selected='${this.forSearch[i]}' name=${ingr.name} image=${ingr.image} name="${ingr.IngredientName}" image="${ingr.Image}" id="${ingr.IngredientId}"></pantry-ingredient>
                 `;
                 }
             )
@@ -83,6 +114,16 @@ export class Pantry extends LitElement {
         </section>
         <button @click="${this.addIngredientButtonHandler}" id="add-ingredient-fab">+</button>
         `;
+    }
+
+    _ingredientClicked(e) {
+        let index = e.target.id;
+
+        this.forSearch[index]  = !this.forSearch[index];
+        console.log(this.selectedNum())
+        this.selectedNm=this.selectedNum()
+
+
     }
 }
 

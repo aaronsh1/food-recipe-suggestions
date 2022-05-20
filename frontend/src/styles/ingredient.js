@@ -18,6 +18,14 @@ export const IngredientStyles = css `
         margin: auto;
     }
 
+    .unselected {
+        background-color: #E9C46A;
+    }
+    
+    .selected {
+        background-color: #2a9d8f;
+    }
+
     .delete-ingredient {
         width: 20%;
         margin: 5%;

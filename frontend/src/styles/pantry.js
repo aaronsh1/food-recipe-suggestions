@@ -14,6 +14,24 @@ export const PantryStyles = css`
     text-align: center;
 }
 
+#search-button {
+    margin: auto;
+    color: white;
+    border-radius: 20%;
+    background-color: #E76F51;
+    border: none;
+    position: fixed;
+    
+    float: right;
+    z-index: 1;
+    box-shadow: grey 0.4em 0.4em 1em;
+    transition: 0.3s;
+}
+
+
+
+
+
 pantry-a {
     background-color: black;
 }
