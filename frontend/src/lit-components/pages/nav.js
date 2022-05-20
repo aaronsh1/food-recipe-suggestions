@@ -53,7 +53,7 @@ export class NavBar extends LitElement {
     render() {
         return html`
         <header id="this-navbar">
-            <a href="/profile" class="navbar-pic" id="profile">
+            <a href=${(!window.localStorage.getItem("token"))? "/login" :"/profile"} class="navbar-pic" id="profile">
                 <img src="/public/images/userprofile.svg" alt="profile">
             </a>
 
